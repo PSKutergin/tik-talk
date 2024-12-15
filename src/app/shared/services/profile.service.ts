@@ -11,6 +11,10 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
+  getMe(): Observable<Profile> {
+    return this.http.get<Profile>(environment.api + 'account/me');
+  }
+
   getTestProfiles(): Observable<Profile[]> {
     return this.http.get<Profile[]>(environment.api + 'account/test_accounts');
   }

@@ -1,6 +1,8 @@
 import { AuthService } from '@/app/core/auth/auth.service';
+import { TokenResponse } from '@/app/interfaces/auth.interface';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,7 @@ export class LoginComponent {
     password: ['', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }
@@ -27,8 +29,8 @@ export class LoginComponent {
         username: this.loginForm.value.username,
         password: this.loginForm.value.password
       })
-        .subscribe((data: any) => {
-          console.log(data);
+        .subscribe((data: TokenResponse) => {
+          this.router.navigate(['']);
         });
     }
   }
