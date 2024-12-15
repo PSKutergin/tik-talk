@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProfileCardComponent } from "./common-ui/profile-card/profile-card.component";
+import { ProfileCardComponent } from "./shared/components/profile-card/profile-card.component";
 
 @Component({
   selector: 'app-root',
