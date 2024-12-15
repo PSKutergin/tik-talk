@@ -10,7 +10,11 @@
 html,
 body {
   font-family: "JetBrains Mono", sans-serif;
-  background: $black;
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: $white;
 }
 
@@ -49,16 +53,28 @@ input[type="number"] {
 }
 
 .btn {
+  width: 100%;
   padding: 0.625rem 1.25rem;
-  border: none;
+  border: 1px solid $black;
   background: $primary;
   color: $black;
   font-weight: 700;
   font-size: 0.875rem;
   line-height: 1.5rem;
+  border-radius: 0.25rem;
 }
 
-.title {
+.btn-shadow {
+  box-shadow: 0.25rem 0.25rem $gray;
+}
+
+.h1 {
+  font-size: 3rem;
+  line-height: 3.5rem;
+  font-weight: 800;
+}
+
+.h6 {
   font-size: 1.125rem;
   line-height: 1.5rem;
   font-weight: 800;
@@ -68,4 +84,27 @@ input[type="number"] {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 400;
+}
+
+.control-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.75rem;
+  line-height: 1rem;
+
+  .input {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: block;
+    outline: none;
+    border: 1px solid $white;
+    border-radius: 0.25rem;
+    background: transparent;
+    padding: 0.75rem 1.25rem;
+    font-family: "JetBrains Mono", sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: $white;
+  }
 }
