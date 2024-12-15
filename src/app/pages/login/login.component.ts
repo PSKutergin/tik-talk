@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  isShowPassword: boolean = false;
+
   loginForm = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
@@ -35,4 +37,7 @@ export class LoginComponent {
     }
   }
 
+  showPassword(): void {
+    this.isShowPassword = !this.isShowPassword;
+  }
 }

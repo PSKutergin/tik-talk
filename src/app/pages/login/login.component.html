@@ -4,14 +4,21 @@
     <label class="control-label mb16">
         Telegram username
         <input class="input" type="text" placeholder="Введите логин" formControlName="username">
+        <span class="input-icon">
+            <img src="assets/svg/telegram.svg" alt="telegram">
+        </span>
     </label>
 
     <label class="control-label mb32">
         Пароль
-        <input class="input" type="text" placeholder="Введите пароль" formControlName="password">
+        <input class="input" [type]="isShowPassword ? 'text' : 'password'" placeholder="Введите пароль"
+            formControlName="password">
+        <button type="button" class="input-icon" (click)="showPassword()">
+            <img [src]="isShowPassword ? 'assets/svg/eye.svg' : 'assets/svg/eye-close.svg'" alt="eye">
+        </button>
     </label>
 
     <button class="btn btn-shadow" type="submit">Войти</button>
 </form>
 
-<img src="assets/svg/logo-big.svg" alt="logo">
+<img src="assets/svg/logo-big.svg" alt="logo" class="big-logo">
