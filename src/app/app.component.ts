@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ProfileCardComponent } from "./shared/components/profile-card/profile-card.component";
+import { Profile } from './interfaces/profile.interface';
+import { ProfileService } from './shared/services/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +12,12 @@ import { ProfileCardComponent } from "./shared/components/profile-card/profile-c
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'tik-talk';
+  profiles: Profile[] = [];
+
+  constructor(private profileService: ProfileService) {
+    this.profileService.getTestProfiles()
+      .subscribe((data: Profile[]) => {
+        this.profiles = data;
+      });
+  }
 }

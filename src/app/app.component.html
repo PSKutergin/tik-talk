@@ -1,1 +1,5 @@
-<profile-card></profile-card>
+<section class="profile-card__wrapper">
+    @for (profile of profiles; track profile.id) {
+    <profile-card [profile]="profile"></profile-card>
+    }
+</section>
