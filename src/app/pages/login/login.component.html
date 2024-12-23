@@ -11,10 +11,10 @@
 
     <label class="control-label mb32">
         Пароль
-        <input class="input" [type]="isShowPassword ? 'text' : 'password'" placeholder="Введите пароль"
+        <input class="input" [type]="isShowPassword() ? 'text' : 'password'" placeholder="Введите пароль"
             formControlName="password">
-        <button type="button" class="input-icon" (click)="showPassword()">
-            <img [src]="isShowPassword ? 'assets/svg/eye.svg' : 'assets/svg/eye-close.svg'" alt="eye">
+        <button type="button" class="input-icon" (click)="isShowPassword.set(!isShowPassword())">
+            <img [src]="isShowPassword() ? 'assets/svg/eye.svg' : 'assets/svg/eye-close.svg'" alt="eye">
         </button>
     </label>
 

@@ -1,6 +1,6 @@
 import { AuthService } from '@/app/core/auth/auth.service';
 import { TokenResponse } from '@/app/interfaces/auth.interface';
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  isShowPassword: boolean = false;
+  isShowPassword = signal<boolean>(false);
 
   loginForm = this.fb.group({
     username: ['', [Validators.required]],
@@ -35,9 +35,5 @@ export class LoginComponent {
           this.router.navigate(['']);
         });
     }
-  }
-
-  showPassword(): void {
-    this.isShowPassword = !this.isShowPassword;
   }
 }
