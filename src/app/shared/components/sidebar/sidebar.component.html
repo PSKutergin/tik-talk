@@ -5,7 +5,7 @@
         @for (item of menuItems; track item) {
         <li>
             <a class="menu-item" [routerLink]="[item.link]">
-                <svg icon="{{ item.icon }}"></svg>
+                <svg class="menu-item-icon" icon="{{ item.icon }}"></svg>
                 <span>{{ item.label }}</span>
             </a>
         </li>
@@ -35,7 +35,7 @@
     <section class="medium-text sidebar__footer-username">{{ me.username }}</section>
 
     <a [routerLink]="['settings']" class="sidebar__footer-settings">
-        <svg icon="settings"></svg>
+        <svg icon="settings" class="sidebar__footer-settings-icon"></svg>
     </a>
     }
 </footer>

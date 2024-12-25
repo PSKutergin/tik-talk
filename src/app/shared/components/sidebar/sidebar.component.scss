@@ -28,7 +28,7 @@
     transition: all 0.3s ease;
     border-radius: 0.125rem;
 
-    svg {
+    &-icon {
       width: 1rem;
       height: 1rem;
       transition: all 0.3s ease;
@@ -39,7 +39,7 @@
       background: $dark-hover;
       color: $primary;
 
-      svg {
+      .menu-item-icon {
         color: $primary;
       }
     }
@@ -51,11 +51,11 @@
   gap: 0.625rem;
   align-items: center;
 
-  .to-subscribers-link {
+  &-link {
     color: $primary;
   }
 
-  .to-subscribers-icon {
+  &-icon {
     width: 1.125rem;
     height: 1.125rem;
     color: $primary;
@@ -90,7 +90,7 @@
     width: 1rem;
     height: 1rem;
 
-    svg {
+    &-icon {
       width: 1rem;
       height: 1rem;
       color: $primary;
