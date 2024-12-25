@@ -9,6 +9,7 @@
 
 html,
 body {
+  height: 100dvh;
   font-family: "JetBrains Mono", sans-serif;
   background-image: url("../images/background.jpg");
   background-repeat: no-repeat;
@@ -84,6 +85,20 @@ input[type="number"] {
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 400;
+}
+
+.medium-text {
+  font-family: "JetBrains Mono", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+}
+
+.regular {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-style: normal;
 }
 
 .control-label {
