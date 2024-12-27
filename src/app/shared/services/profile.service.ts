@@ -24,14 +24,14 @@ export class ProfileService {
     return this.http.get<Profile[]>(environment.api + 'account/test_accounts');
   }
 
-  getAccount(id: string): Observable<Profile[]> {
-    return this.http.get<Profile[]>(environment.api + 'account/' + id);
+  getAccount(id: string): Observable<Profile> {
+    return this.http.get<Profile>(environment.api + 'account/' + id);
   }
 
-  getSubscribersShortList(): Observable<Profile[]> {
+  getSubscribersShortList(subscribersAmount: number = 3): Observable<Profile[]> {
     return this.http.get<Pageble<Profile>>(environment.api + 'account/subscribers/')
       .pipe(
-        map(res => res.items.slice(0, 3))
+        map(res => res.items.slice(0, subscribersAmount))
       )
   }
 }
