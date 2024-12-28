@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProfileHeaderComponent } from "@/app/shared/components/profile-header/profile-header.component";
 import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
@@ -6,15 +6,18 @@ import { RouterLink } from '@angular/router';
 import { ProfileService } from '@/app/shared/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from '@/app/core/auth/auth.service';
+import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [SvgIconComponent, ProfileHeaderComponent, ReactiveFormsModule, RouterLink],
+  imports: [SvgIconComponent, ProfileHeaderComponent, ReactiveFormsModule, RouterLink, AvatarUploadComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
+
+  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
 
   profileForm = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -43,6 +46,10 @@ export class SettingsComponent {
     this.profileForm.updateValueAndValidity();
 
     if (this.profileForm.invalid) return
+
+    if (this.avatarUploader.avatar) {
+      firstValueFrom(this.profileService.uploadAvatar(this.avatarUploader.avatar))
+    }
 
     //@ts-ignore
     firstValueFrom(this.profileService.updateProfile({

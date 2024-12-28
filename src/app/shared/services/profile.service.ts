@@ -38,4 +38,12 @@ export class ProfileService {
   updateProfile(data: Partial<Profile>): Observable<Profile> {
     return this.http.patch<Profile>(environment.api + 'account/me', data);
   }
+
+  uploadAvatar(file: File): Observable<Profile> {
+    const fd = new FormData();
+
+    fd.append('image', file);
+
+    return this.http.post<Profile>(environment.api + 'account/upload_image', fd);
+  }
 }

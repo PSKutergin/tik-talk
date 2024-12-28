@@ -1,0 +1,43 @@
+@import "@/assets/styles/_variables.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: 7.75rem 1fr;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem solid $white;
+}
+
+.avatar {
+  width: 7.75rem;
+  height: 7.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.dropzone {
+  border-radius: 0.125rem;
+  border: 0.1rem dashed $white;
+  padding: 1rem;
+  transition: all 0.3s ease;
+
+  &.fileover {
+    border-color: $primary;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    &-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+}
