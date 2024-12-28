@@ -34,4 +34,8 @@ export class ProfileService {
         map(res => res.items.slice(0, subscribersAmount))
       )
   }
+
+  updateProfile(data: Partial<Profile>): Observable<Profile> {
+    return this.http.patch<Profile>(environment.api + 'account/me', data);
+  }
 }

@@ -53,16 +53,27 @@ input[type="number"] {
   height: fit-content;
 }
 
-.btn {
+.btn,
+.btn-transparent {
   width: 100%;
   padding: 0.625rem 1.25rem;
-  border: 1px solid $black;
-  background: $primary;
-  color: $black;
+  border: 0.1rem solid;
   font-weight: 700;
   font-size: 0.875rem;
   line-height: 1.5rem;
   border-radius: 0.25rem;
+}
+
+.btn {
+  border-color: $black;
+  background: $primary;
+  color: $black;
+}
+
+.btn-transparent {
+  border-color: $white;
+  background: transparent;
+  color: $white;
 }
 
 .btn-shadow {

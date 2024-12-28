@@ -2,7 +2,7 @@
 <header class="profile-page__header">
     <app-profile-header [profile]="profile"></app-profile-header>
 
-    <a [routerLink]="['settings']" class="btn settings-btn">
+    <a [routerLink]="['/settings']" class="btn settings-btn">
         Редактировать
         <svg icon="settings" class="settings-btn__icon"></svg>
     </a>
@@ -16,11 +16,11 @@
 
         <section class="subscribers-wrapper mb32">
             @for (subscriber of subscribers$ | async; track subscriber.id) {
-            <a class="subscriber-avatar-link" [routerLink]="['profile', subscriber.id]">
+            <a class="subscriber-avatar-link" [routerLink]="['/profile', subscriber.id]">
                 <img [src]="subscriber.avatarUrl | imgUrl" [alt]="subscriber.lastName">
             </a>
             }
-            <a class="to-subscribers-search" [routerLink]="['search']"></a>
+            <a class="to-subscribers-search" [routerLink]="['/search']"></a>
         </section>
 
         <h3 class="h6 mb16">Навыки</h3>
