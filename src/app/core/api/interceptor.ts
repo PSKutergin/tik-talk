@@ -1,10 +1,10 @@
 import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { AuthService } from "../auth/auth.service";
-import { catchError, finalize, Observable, switchMap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, filter, finalize, Observable, switchMap, tap, throwError } from "rxjs";
 import { TokenResponse } from "@/app/interfaces/auth.interface";
 
-let isRefreshing: boolean = false;
+let isRefreshing$ = new BehaviorSubject<boolean>(false);
 
 export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn): Observable<any> => {
     const authService: AuthService = inject(AuthService);
@@ -12,7 +12,7 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
 
     if (!token) return next(req);
 
-    if (isRefreshing) return refreshAndProceed(authService, req, next);
+    if (isRefreshing$.value) return refreshAndProceed(authService, req, next);
 
     return next(addToken(req, token))
         .pipe(
@@ -27,19 +27,25 @@ export const authInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: 
 }
 
 const refreshAndProceed = (authService: AuthService, req: HttpRequest<any>, next: HttpHandlerFn) => {
-    if (!isRefreshing) {
-        isRefreshing = true;
+    if (!isRefreshing$.value) {
+        isRefreshing$.next(true);
 
         return authService.refresh()
             .pipe(
-                switchMap((res: TokenResponse) => next(addToken(req, res.access_token!))),
-                finalize(() => {
-                    isRefreshing = false;
-                })
+                switchMap((res: TokenResponse) => next(addToken(req, res.access_token!))
+                    .pipe(
+                        tap(() => isRefreshing$.next(false)),
+                    ))
             );
     }
 
-    return next(addToken(req, authService.token!));
+    if (req.url.includes('refresh')) return next(addToken(req, authService.token!));
+
+    return isRefreshing$
+        .pipe(
+            filter(isRefreshing => !isRefreshing),
+            switchMap(() => next(addToken(req, authService.token!)))
+        )
 }
 
 const addToken = (req: HttpRequest<any>, token: string): HttpRequest<any> => {
