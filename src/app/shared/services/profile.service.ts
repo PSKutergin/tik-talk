@@ -10,6 +10,7 @@ import { map, Observable, tap } from 'rxjs';
 })
 export class ProfileService {
   me = signal<Profile | null>(null);
+  filteredProfiles = signal<Profile[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -45,5 +46,12 @@ export class ProfileService {
     fd.append('image', file);
 
     return this.http.post<Profile>(environment.api + 'account/upload_image', fd);
+  }
+
+  filterProfiles(params: Record<string, any>): Observable<Pageble<Profile>> {
+    return this.http.get<Pageble<Profile>>(environment.api + 'account/accounts', { params })
+      .pipe(
+        tap(res => this.filteredProfiles.set(res.items))
+      )
   }
 }
