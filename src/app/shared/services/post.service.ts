@@ -29,7 +29,7 @@ export class PostService {
   getCommentsByPostId(postId: number): Observable<Comment[]> {
     return this.http.get<Post>(environment.api + `post/${postId}`)
       .pipe(
-        map(res => res.comments)
+        map(res => res.comments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
       )
   }
 

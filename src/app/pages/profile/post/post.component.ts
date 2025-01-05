@@ -4,15 +4,15 @@ import { AvatarCircleComponent } from "@/app/shared/components/avatar-circle/ava
 import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
 import { PostInputComponent } from "@/app/pages/profile/post-input/post-input.component";
 import { CommentComponent } from "@/app/pages/profile/post/comment/comment.component";
-import { DatePipe } from '@angular/common';
 import { PostService } from '@/app/shared/services/post.service';
 import { firstValueFrom } from 'rxjs';
+import { TimeFormatPipe } from '@/app/shared/pipes/time-format.pipe';
 
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [SvgIconComponent, AvatarCircleComponent, DatePipe, PostInputComponent, CommentComponent],
+  imports: [SvgIconComponent, AvatarCircleComponent, PostInputComponent, CommentComponent, TimeFormatPipe],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss'
 })
@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.comments.set(this.post()!.comments)
+    this.comments.set(this.post()!.comments.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()))
   }
 
   onCreatedComment(data: Record<string, any>) {
