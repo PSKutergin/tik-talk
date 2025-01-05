@@ -1,0 +1,18 @@
+img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+:host {
+  &.size32 {
+    width: 2rem;
+    height: 2rem;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}

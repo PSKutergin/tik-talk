@@ -14,7 +14,6 @@ export const routes: Routes = [
                 { path: 'profile/:id', component: ProfileComponent },
                 { path: 'settings', component: SettingsComponent },
                 { path: 'search', component: SearchComponent },
-                { path: '**', redirectTo: '' }
             ],
         canActivate: [canActivateAuth]
     },

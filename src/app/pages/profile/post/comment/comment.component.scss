@@ -1,0 +1,19 @@
+@import "@/assets/styles/_variables.scss";
+
+:host {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 1rem;
+}
+
+.comment-body {
+  display: grid;
+  gap: 0.5rem;
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $white-075;
+  }
+}

@@ -5,7 +5,7 @@
         @for (item of menuItems; track item) {
         <li>
             <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
-                <svg class="menu-item-icon" icon="{{ item.icon }}"></svg>
+                <svg class="svg16 menu-item-icon" icon="{{ item.icon }}"></svg>
                 <span>{{ item.label }}</span>
             </a>
         </li>
@@ -20,9 +20,9 @@
 }
 
 <section class="mt20 to-subscribers">
-    <a [routerLink]="['subscribers']" class="to-subscribers-link medium-text">Все
+    <a [routerLink]="['subscribers']" class="medium-text">Все
         подписчики</a>
-    <svg icon="arrow" class="to-subscribers-icon"></svg>
+    <svg icon="arrow" class="svg16"></svg>
 </section>
 
 <footer class="sidebar__footer">
@@ -36,7 +36,7 @@
     <section class="medium-text sidebar__footer-username">{{ me.username }}</section>
 
     <a [routerLink]="['settings']" class="sidebar__footer-settings">
-        <svg icon="settings" class="sidebar__footer-settings-icon"></svg>
+        <svg icon="settings" class="svg16"></svg>
     </a>
     }
 </footer>

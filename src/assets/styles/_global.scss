@@ -70,6 +70,39 @@ input[type="number"] {
   color: $black;
 }
 
+.btn-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0.1rem solid $black;
+  outline: none;
+  background: $primary;
+  color: $black;
+  border-radius: 0.25rem;
+  display: grid;
+  place-items: center;
+}
+
+.svg16 {
+  width: 1rem;
+  height: 1rem;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.svg24 {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+.svg32 {
+  width: 2rem;
+  height: 2rem;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
 .btn-transparent {
   border-color: $white;
   background: transparent;
@@ -109,6 +142,7 @@ input[type="number"] {
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 500;
+  color: inherit;
 }
 
 .regular {
