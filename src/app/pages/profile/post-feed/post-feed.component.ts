@@ -36,4 +36,14 @@ export class PostFeedComponent {
 
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
   }
+
+  onCreatedPost(data: Record<string, any>) {
+    firstValueFrom(
+      this.postService.createPost({
+        title: 'New post',
+        content: data['text'],
+        authorId: data['authorId']
+      })
+    )
+  }
 }

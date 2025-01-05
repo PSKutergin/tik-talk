@@ -11,7 +11,7 @@
         </strong>
     </header>
 
-    <p class="medium-text">{{ post.content }}</p>
+    <p class="medium-text post-content">{{ post.content }}</p>
 
     <section class="post-counters">
         <section class="amount comments">
@@ -31,6 +31,6 @@
         }
     </section>
 
-    <app-post-input [postId]="post.id" [isCommentInput]="true" (created)="onCreated()"></app-post-input>
+    <app-post-input [isCommentInput]="true" (created)="onCreatedComment($event)"></app-post-input>
 </main>
 }

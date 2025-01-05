@@ -26,8 +26,16 @@ export class PostComponent implements OnInit {
     this.comments.set(this.post()!.comments)
   }
 
-  async onCreated() {
-    const comments = await firstValueFrom(this.postService.getCommentsByPostId(this.post()!.id))
-    this.comments.set(comments)
+  onCreatedComment(data: Record<string, any>) {
+    firstValueFrom(
+      this.postService.createComment({
+        text: data['text'],
+        authorId: data['authorId'],
+        postId: this.post()!.id
+      })
+    ).then(async () => {
+      const comments = await firstValueFrom(this.postService.getCommentsByPostId(this.post()!.id))
+      this.comments.set(comments)
+    })
   }
 }
