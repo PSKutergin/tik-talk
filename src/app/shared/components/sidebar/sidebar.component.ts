@@ -6,12 +6,12 @@ import { ProfileService } from '@/app/shared/services/profile.service';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { Profile } from '@/app/interfaces/profile.interface';
-import { ImgUrlPipe } from "@/app/shared/pipes/img-url.pipe";
+import { AvatarCircleComponent } from "../avatar-circle/avatar-circle.component";
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SvgIconComponent, SubscriberCardComponent, RouterLink, RouterLinkActive, AsyncPipe, ImgUrlPipe],
+  imports: [SvgIconComponent, SubscriberCardComponent, RouterLink, RouterLinkActive, AsyncPipe, AvatarCircleComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

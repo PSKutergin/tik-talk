@@ -6,13 +6,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
-import { ImgUrlPipe } from "../../shared/pipes/img-url.pipe";
 import { PostFeedComponent } from "./post-feed/post-feed.component";
+import { AvatarCircleComponent } from "@/app/shared/components/avatar-circle/avatar-circle.component";
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [SvgIconComponent, AsyncPipe, ProfileHeaderComponent, RouterLink, ImgUrlPipe, PostFeedComponent],
+  imports: [SvgIconComponent, AsyncPipe, ProfileHeaderComponent, RouterLink, PostFeedComponent, AvatarCircleComponent],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })

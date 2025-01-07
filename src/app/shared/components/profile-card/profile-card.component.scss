@@ -12,13 +12,6 @@
     grid-template-columns: 4.375rem 1fr;
     gap: 1.25rem;
 
-    &-img {
-      width: 4.375rem;
-      height: 4.375rem;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-
     &-name {
       display: grid;
       grid-template-columns: 1fr;

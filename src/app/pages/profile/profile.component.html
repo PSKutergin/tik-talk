@@ -17,7 +17,7 @@
         <section class="subscribers-wrapper mb32">
             @for (subscriber of subscribers$ | async; track subscriber.id) {
             <a class="subscriber-avatar-link" [routerLink]="['/profile', subscriber.id]">
-                <img [src]="subscriber.avatarUrl | imgUrl" [alt]="subscriber.lastName">
+                <app-avatar-circle [avatarUrl]="subscriber.avatarUrl" class="size32"></app-avatar-circle>
             </a>
             }
             <a class="to-subscribers-search" [routerLink]="['/search']"></a>

@@ -27,11 +27,7 @@
 
 <footer class="sidebar__footer">
     @if (me(); as me) {
-    @if (me.avatarUrl) {
-    <img [src]="me.avatarUrl | imgUrl" alt="avatar" class="sidebar__footer-avatar">
-    } @else {
-    <img src="/assets/images/avatar-placeholder.png" alt="avatar" class="sidebar__footer-avatar">
-    }
+    <app-avatar-circle [avatarUrl]="me.avatarUrl" class="size32"></app-avatar-circle>
 
     <section class="medium-text sidebar__footer-username">{{ me.username }}</section>
 
