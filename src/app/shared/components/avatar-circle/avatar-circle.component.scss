@@ -15,4 +15,14 @@ img {
       height: 2rem;
     }
   }
+
+  &.size70 {
+    width: 4.375rem;
+    height: 4.375rem;
+
+    img {
+      width: 4.375rem;
+      height: 4.375rem;
+    }
+  }
 }
