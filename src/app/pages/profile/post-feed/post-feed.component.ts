@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, inject, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, HostListener, inject, OnDestroy, Renderer2 } from '@angular/core';
 import { PostInputComponent } from "../post-input/post-input.component";
 import { PostComponent } from "../post/post.component";
 import { PostService } from '@/app/shared/services/post.service';
-import { firstValueFrom } from 'rxjs';
+import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-post-feed',
@@ -11,15 +12,11 @@ import { firstValueFrom } from 'rxjs';
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss'
 })
-export class PostFeedComponent {
+export class PostFeedComponent implements AfterViewInit, OnDestroy {
   r2 = inject(Renderer2)
   hostElement = inject(ElementRef)
+  destroy$ = inject(DestroyRef);
   feed = this.postService.posts
-
-  @HostListener('window:resize')
-  onWindowResize() {
-    this.resizeFeed()
-  }
 
   constructor(private postService: PostService) {
     firstValueFrom(this.postService.getPosts())
@@ -27,7 +24,18 @@ export class PostFeedComponent {
 
   ngAfterViewInit(): void {
     this.resizeFeed()
+
+    fromEvent(window, 'resize')
+      .pipe(
+        debounceTime(100),
+        takeUntilDestroyed(this.destroy$)
+      )
+      .subscribe(() => {
+        this.resizeFeed()
+      })
   }
+
+  ngOnDestroy(): void { }
 
   resizeFeed(): void {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect()
