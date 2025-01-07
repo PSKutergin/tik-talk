@@ -10,8 +10,9 @@ export class TimeFormatPipe implements PipeTransform {
     if (!value) return null;
 
     const now = new Date();
+    const offset = now.getTimezoneOffset() * 60 * 1000;
     const date = new Date(value);
-    const diff = now.getTime() - date.getTime();
+    const diff = now.getTime() + offset - date.getTime();
 
     const seconds = Math.floor(diff / 1000);
     const minutes = Math.floor(seconds / 60);
