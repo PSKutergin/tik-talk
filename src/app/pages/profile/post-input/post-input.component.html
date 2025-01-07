@@ -3,7 +3,8 @@
 </app-avatar-circle>
 }
 
-<textarea class="hidden-textarea" (input)="onTextareaInput($event)" [(ngModel)]="postText"></textarea>
+<textarea class="hidden-textarea" (input)="onTextareaInput($event)" (keyup.enter)="onCreate()"
+    [(ngModel)]="postText"></textarea>
 
 <button class="btn-icon" (click)="onCreate()">
     <svg icon="send-message" class="svg16"></svg>
