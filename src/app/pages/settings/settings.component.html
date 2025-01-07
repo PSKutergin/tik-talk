@@ -1,4 +1,7 @@
-<app-profile-header></app-profile-header>
+@if(profile$ | async; as profile) {
+<app-profile-header [profile]="profile"></app-profile-header>
+}
+
 
 <form class="settings-form" [formGroup]="profileForm">
     <section class="settings-form__content">

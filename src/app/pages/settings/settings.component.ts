@@ -5,19 +5,23 @@ import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.comp
 import { RouterLink } from '@angular/router';
 import { ProfileService } from '@/app/shared/services/profile.service';
 import { firstValueFrom } from 'rxjs';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { AuthService } from '@/app/core/auth/auth.service';
 import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [SvgIconComponent, ProfileHeaderComponent, ReactiveFormsModule, RouterLink, AvatarUploadComponent],
+  imports: [SvgIconComponent, ProfileHeaderComponent, ReactiveFormsModule, RouterLink, AvatarUploadComponent, AsyncPipe],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })
 export class SettingsComponent {
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
+
+  profile$ = toObservable(this.profileService.me)
 
   profileForm = this.fb.group({
     firstName: ['', [Validators.required]],
