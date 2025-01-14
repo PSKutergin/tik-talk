@@ -5,24 +5,18 @@ import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.comp
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-post-input',
+  selector: 'app-message-input',
   standalone: true,
   imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
-  templateUrl: './post-input.component.html',
-  styleUrl: './post-input.component.scss'
+  templateUrl: './message-input.component.html',
+  styleUrl: './message-input.component.scss'
 })
-export class PostInputComponent {
+export class MessageInputComponent {
   r2: Renderer2 = inject(Renderer2)
   profile = inject(ProfileService).me
-  isCommentInput = input<boolean>(false)
   postText: string = '';
 
-  @Output() created = new EventEmitter<Record<string, any>>()
-
-  @HostBinding('class.comment')
-  get isComment() {
-    return this.isCommentInput()
-  }
+  @Output() created = new EventEmitter<string>()
 
   onTextareaInput(event: Event) {
     const textarea = event.target as HTMLTextAreaElement
@@ -34,7 +28,7 @@ export class PostInputComponent {
   onCreate() {
     if (!this.postText) return;
 
-    this.created.emit({ text: this.postText, authorId: this.profile()!.id })
+    this.created.emit(this.postText)
     this.postText = ''
   }
 }

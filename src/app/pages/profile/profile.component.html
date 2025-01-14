@@ -2,10 +2,14 @@
 <header class="profile-page__header">
     <app-profile-header [profile]="profile"></app-profile-header>
 
+    @if(isMyPage()) {
     <a [routerLink]="['/settings']" class="btn settings-btn">
         Редактировать
         <svg icon="settings" class="svg16"></svg>
     </a>
+    } @else {
+    <button class="btn settings-btn" (click)="onSendMessage(profile.id)">Написать</button>
+    }
 </header>
 
 <main class="profile-page__body">

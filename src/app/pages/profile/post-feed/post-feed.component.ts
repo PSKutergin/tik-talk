@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, HostListener, inject, OnDestroy, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, Renderer2 } from '@angular/core';
 import { PostInputComponent } from "../post-input/post-input.component";
 import { PostComponent } from "../post/post.component";
 import { PostService } from '@/app/shared/services/post.service';

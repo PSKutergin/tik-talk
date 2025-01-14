@@ -1,0 +1,9 @@
+@import "@/assets/styles/_variables.scss";
+
+:host {
+  height: 100%;
+  background: $black;
+  display: grid;
+  grid-template-columns: 23.75rem 1fr;
+  border: 0.1rem solid $white;
+}

@@ -1,0 +1,8 @@
+<section class="message-wrapper mb16" #messageWrapper>
+    @for(message of messages(); track message.id) {
+    <app-chat-workspace-message [message]="message"></app-chat-workspace-message>
+    }
+</section>
+
+
+<app-message-input (created)="onMessageCreated($event)"></app-message-input>

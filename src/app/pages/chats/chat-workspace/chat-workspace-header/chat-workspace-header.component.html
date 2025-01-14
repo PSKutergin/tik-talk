@@ -1,0 +1,13 @@
+@if(profile(); as profile) {
+<section></section>
+
+<section class="companion__wrapper">
+    <app-avatar-circle [avatarUrl]="profile.avatarUrl" class="size32"></app-avatar-circle>
+
+    <section class="subtitle">
+        {{ profile.firstName }} {{ profile.lastName }}
+    </section>
+</section>
+
+<section></section>
+}

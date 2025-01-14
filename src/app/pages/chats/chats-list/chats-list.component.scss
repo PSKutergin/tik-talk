@@ -1,0 +1,11 @@
+@import "@/assets/styles/_variables.scss";
+
+:host {
+  border-right: 0.1rem solid $white;
+  display: block;
+}
+
+.chats-filter-input__wrapper {
+  padding: 1rem 1.25rem;
+  border-bottom: 0.1rem solid $white;
+}

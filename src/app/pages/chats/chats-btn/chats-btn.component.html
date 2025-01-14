@@ -1,0 +1,8 @@
+@if(chat(); as chat) {
+<app-avatar-circle class="size32" [avatarUrl]="chat.userFrom.avatarUrl"></app-avatar-circle>
+
+<section class="last-message__wrapper">
+    <section class="medium-text chat-user">{{ chat.userFrom.firstName }} {{ chat.userFrom.lastName }}</section>
+    <section class="medium-text">{{ chat.message ?? "Нет сообщений" }}</section>
+</section>
+}
