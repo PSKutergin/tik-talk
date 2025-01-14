@@ -24,4 +24,5 @@ export interface LastMessageResponse {
     id: number;
     userFrom: Profile;
     message: string | null;
+    unreadMessages: number;
 }

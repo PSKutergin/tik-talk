@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, inject, input, InputSignal, OnInit, Renderer2, signal, ViewChild, WritableSignal } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DestroyRef, ElementRef, inject, input, InputSignal, OnDestroy, OnInit, Renderer2, signal, ViewChild, WritableSignal } from '@angular/core';
 import { ChatWorkspaceMessageComponent } from "./chat-workspace-message/chat-workspace-message.component";
 import { MessageInputComponent } from "@/app/shared/components/message-input/message-input.component";
 import { Chat } from '@/app/interfaces/chat.interface';
@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './chat-workspace-message-wrapper.component.html',
   styleUrl: './chat-workspace-message-wrapper.component.scss'
 })
-export class ChatWorkspaceMessageWrapperComponent {
+export class ChatWorkspaceMessageWrapperComponent implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   r2 = inject(Renderer2)
   hostElement = inject(ElementRef)
   destroy$ = inject(DestroyRef);
@@ -25,13 +25,12 @@ export class ChatWorkspaceMessageWrapperComponent {
 
   messages = this.chatService.activeChatMessages
 
+  ngOnInit(): void {
+    this.scrollMessages()
+  }
+
   ngAfterViewInit(): void {
     this.resizeFeed()
-
-    if (this.messageWrapper) {
-      console.log(this.messageWrapper);
-      this.messageWrapper.nativeElement.scrollTop = this.messageWrapper.nativeElement.scrollHeight;
-    }
 
     fromEvent(window, 'resize')
       .pipe(
@@ -43,19 +42,30 @@ export class ChatWorkspaceMessageWrapperComponent {
       })
   }
 
+  ngAfterViewChecked() {
+    this.scrollMessages();
+  }
+
   ngOnDestroy(): void { }
 
   resizeFeed(): void {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect()
-
     const height = window.innerHeight - top - 24
 
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
+  }
+
+  scrollMessages() {
+    if (this.messageWrapper) {
+      this.messageWrapper.nativeElement.scrollTop = this.messageWrapper.nativeElement.scrollHeight;
+    }
   }
 
   async onMessageCreated(messageText: string) {
     await firstValueFrom(this.chatService.sendMessage(this.chat().id, messageText))
 
     await firstValueFrom(this.chatService.getChatById(this.chat().id))
+
+    this.scrollMessages()
   }
 }
