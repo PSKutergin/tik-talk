@@ -19,8 +19,6 @@ export class ChatsBtnComponent {
     const currentDate = new Date();
     const chatDate = new Date(date);
 
-
-
     if (currentDate.getDate() > chatDate.getDate()) {
       return this.datePipe.transform(chatDate, 'dd.MM.yy');
     } else {

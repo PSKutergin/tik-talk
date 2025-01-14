@@ -7,7 +7,7 @@
         <span>{{ getFormattedDate(chat.createdAt) }}</span>
     </section>
     <section class="medium-text message">
-        <span>{{ chat.message ?? "Нет сообщений" }}</span>
+        <span class="clamp-text">{{ chat.message ?? "Нет сообщений" }}</span>
         @if(chat.unreadMessages) {
         <span class="count">{{ chat.unreadMessages }}</span>
         }
