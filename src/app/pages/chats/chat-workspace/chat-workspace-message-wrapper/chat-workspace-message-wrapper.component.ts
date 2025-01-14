@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, DestroyRef, ElementRef, inject, input, InputSignal, OnDestroy, OnInit, Renderer2, signal, ViewChild, WritableSignal } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, DestroyRef, ElementRef, inject, input, InputSignal, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ChatWorkspaceMessageComponent } from "./chat-workspace-message/chat-workspace-message.component";
 import { MessageInputComponent } from "@/app/shared/components/message-input/message-input.component";
 import { Chat } from '@/app/interfaces/chat.interface';

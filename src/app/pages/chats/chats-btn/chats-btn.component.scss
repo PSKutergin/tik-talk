@@ -25,7 +25,31 @@
   text-align: left;
   color: $white;
 
+  .chat-user,
+  .message {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
   .chat-user {
+    align-items: center;
     color: $white-075;
+  }
+
+  .message {
+    align-items: flex-start;
+    white-space: pre-wrap;
+
+    .count {
+      background: $primary;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $white;
+    }
   }
 }
