@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from '@/environments/environment';
-import { Chat, LastMessageResponse, Message } from '@/app/interfaces/chat.interface';
+import {
+  Chat,
+  LastMessageResponse,
+  Message
+} from '@/app/interfaces/chat.interface';
 import { map, Observable } from 'rxjs';
 import { Profile } from '@/app/interfaces/profile.interface';
 import { ProfileService } from './profile.service';
@@ -13,34 +17,41 @@ import { DateTime } from 'luxon';
 export class ChatService {
   chatsUrl = `${environment.api}chat/`;
   messagesUrl = `${environment.api}message/`;
-  me: WritableSignal<Profile | null> = inject(ProfileService).me
-  activeChatMessages = signal<{ date: string, messages: Message[] }[]>([])
+  me: WritableSignal<Profile | null> = inject(ProfileService).me;
+  activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMyChats(): Observable<LastMessageResponse[]> {
-    return this.http.get<LastMessageResponse[]>(`${this.chatsUrl}get_my_chats/`);
+    return this.http.get<LastMessageResponse[]>(
+      `${this.chatsUrl}get_my_chats/`
+    );
   }
 
   getChatById(id: number): Observable<Chat> {
-    return this.http.get<Chat>(`${this.chatsUrl}${id}`)
-      .pipe(
-        map((chat: Chat) => {
-          const patchedMessages = chat.messages.map(message => ({
-            ...message,
-            user: chat.userFirst.id === message.userFromId ? chat.userFirst : chat.userSecond,
-            isMine: message.userFromId === this.me()!.id
-          }))
+    return this.http.get<Chat>(`${this.chatsUrl}${id}`).pipe(
+      map((chat: Chat) => {
+        const patchedMessages = chat.messages.map((message) => ({
+          ...message,
+          user:
+            chat.userFirst.id === message.userFromId
+              ? chat.userFirst
+              : chat.userSecond,
+          isMine: message.userFromId === this.me()!.id
+        }));
 
-          this.groupMessagesByDate(patchedMessages)
+        this.groupMessagesByDate(patchedMessages);
 
-          return {
-            ...chat,
-            companion: chat.userFirst.id === this.me()!.id ? chat.userSecond : chat.userFirst,
-            messages: patchedMessages
-          }
-        })
-      )
+        return {
+          ...chat,
+          companion:
+            chat.userFirst.id === this.me()!.id
+              ? chat.userSecond
+              : chat.userFirst,
+          messages: patchedMessages
+        };
+      })
+    );
   }
 
   createdChat(userId: number): Observable<Chat> {
@@ -48,13 +59,20 @@ export class ChatService {
   }
 
   sendMessage(chatId: number, message: string): Observable<Message> {
-    return this.http.post<Message>(`${this.messagesUrl}send/${chatId}`, {}, { params: { message } });
+    return this.http.post<Message>(
+      `${this.messagesUrl}send/${chatId}`,
+      {},
+      { params: { message } }
+    );
   }
 
   groupMessagesByDate(messages: Message[]) {
-    const groupedMessages: { date: string, messages: Message[] }[] = [];
+    const groupedMessages: { date: string; messages: Message[] }[] = [];
     const today = DateTime.local().startOf('day').toFormat('dd.MM.yyyy');
-    const yesterday = DateTime.local().minus({ days: 1 }).startOf('day').toFormat('dd.MM.yyyy');
+    const yesterday = DateTime.local()
+      .minus({ days: 1 })
+      .startOf('day')
+      .toFormat('dd.MM.yyyy');
 
     messages.forEach((message) => {
       let date = DateTime.fromISO(message.createdAt, { zone: 'utc' })
@@ -74,7 +92,7 @@ export class ChatService {
       }
 
       // Ищем, существует ли уже группа для этой даты
-      let group = groupedMessages.find(group => group.date === date);
+      let group = groupedMessages.find((group) => group.date === date);
 
       if (!group) {
         // Если группы с такой датой нет, создаем новую
@@ -86,7 +104,6 @@ export class ChatService {
       group.messages.push(message);
     });
 
-    this.activeChatMessages.set(groupedMessages)
+    this.activeChatMessages.set(groupedMessages);
   }
-
 }

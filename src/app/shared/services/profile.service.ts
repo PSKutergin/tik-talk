@@ -12,13 +12,12 @@ export class ProfileService {
   me = signal<Profile | null>(null);
   filteredProfiles = signal<Profile[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMe(): Observable<Profile> {
-    return this.http.get<Profile>(environment.api + 'account/me')
-      .pipe(
-        tap((data: Profile) => this.me.set(data))
-      )
+    return this.http
+      .get<Profile>(environment.api + 'account/me')
+      .pipe(tap((data: Profile) => this.me.set(data)));
   }
 
   getTestProfiles(): Observable<Profile[]> {
@@ -29,11 +28,12 @@ export class ProfileService {
     return this.http.get<Profile>(environment.api + 'account/' + id);
   }
 
-  getSubscribersShortList(subscribersAmount: number = 3): Observable<Profile[]> {
-    return this.http.get<Pageble<Profile>>(environment.api + 'account/subscribers/')
-      .pipe(
-        map(res => res.items.slice(0, subscribersAmount))
-      )
+  getSubscribersShortList(
+    subscribersAmount: number = 3
+  ): Observable<Profile[]> {
+    return this.http
+      .get<Pageble<Profile>>(environment.api + 'account/subscribers/')
+      .pipe(map((res) => res.items.slice(0, subscribersAmount)));
   }
 
   updateProfile(data: Partial<Profile>): Observable<Profile> {
@@ -45,13 +45,15 @@ export class ProfileService {
 
     fd.append('image', file);
 
-    return this.http.post<Profile>(environment.api + 'account/upload_image', fd);
+    return this.http.post<Profile>(
+      environment.api + 'account/upload_image',
+      fd
+    );
   }
 
   filterProfiles(params: Record<string, any>): Observable<Pageble<Profile>> {
-    return this.http.get<Pageble<Profile>>(environment.api + 'account/accounts', { params })
-      .pipe(
-        tap(res => this.filteredProfiles.set(res.items))
-      )
+    return this.http
+      .get<Pageble<Profile>>(environment.api + 'account/accounts', { params })
+      .pipe(tap((res) => this.filteredProfiles.set(res.items)));
   }
 }

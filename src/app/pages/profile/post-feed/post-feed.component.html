@@ -1,7 +1,7 @@
 <app-post-input (created)="onCreatedPost($event)"></app-post-input>
 
 <section class="post__wrapper">
-    @for(post of feed(); track post.id) {
+  @for (post of feed(); track post.id) {
     <app-post [post]="post"></app-post>
-    }
+  }
 </section>

@@ -1,4 +1,4 @@
-@import "@/assets/styles/_variables.scss";
+@import '@/assets/styles/_variables.scss';
 
 :host {
   height: fit-content;
@@ -18,7 +18,8 @@
     .message-text {
       color: $black;
       background: $primary;
-      mask: linear-gradient(#000 0 0),
+      mask:
+        linear-gradient(#000 0 0),
         linear-gradient(-135deg, #000 50%, #0000 0) border-box 100% 100% / 200%
           200% no-repeat;
       mask-composite: exclude;
@@ -34,7 +35,8 @@
     padding: 0.5rem 1rem;
     background: $message-bg;
     font-weight: 500;
-    mask: linear-gradient(#000 0 0),
+    mask:
+      linear-gradient(#000 0 0),
       linear-gradient(135deg, #000 50%, #0000 0) border-box 100% 100% / 200%
         200% no-repeat;
     mask-composite: exclude;

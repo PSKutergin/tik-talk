@@ -1,4 +1,4 @@
-@import "@/assets/styles/_variables.scss";
+@import '@/assets/styles/_variables.scss';
 
 .profile-page {
   &__header {
@@ -42,7 +42,7 @@
 
         &::after,
         &::before {
-          content: "";
+          content: '';
           position: absolute;
           width: 0.1rem;
           height: 0.5rem;

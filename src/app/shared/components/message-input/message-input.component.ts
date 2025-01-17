@@ -1,6 +1,14 @@
 import { ProfileService } from '@/app/shared/services/profile.service';
-import { Component, EventEmitter, HostBinding, inject, input, Output, Renderer2 } from '@angular/core';
-import { AvatarCircleComponent } from "@/app/shared/components/avatar-circle/avatar-circle.component";
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  inject,
+  input,
+  Output,
+  Renderer2
+} from '@angular/core';
+import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
 import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
 import { FormsModule } from '@angular/forms';
 
@@ -12,14 +20,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './message-input.component.scss'
 })
 export class MessageInputComponent {
-  r2: Renderer2 = inject(Renderer2)
-  profile = inject(ProfileService).me
+  r2: Renderer2 = inject(Renderer2);
+  profile = inject(ProfileService).me;
   postText: string = '';
 
-  @Output() created = new EventEmitter<string>()
+  @Output() created = new EventEmitter<string>();
 
   onTextareaInput(event: Event) {
-    const textarea = event.target as HTMLTextAreaElement
+    const textarea = event.target as HTMLTextAreaElement;
 
     this.r2.setStyle(textarea, 'height', 'auto');
     this.r2.setStyle(textarea, 'height', `${textarea.scrollHeight}px`);
@@ -28,7 +36,7 @@ export class MessageInputComponent {
   onCreate() {
     if (!this.postText) return;
 
-    this.created.emit(this.postText)
-    this.postText = ''
+    this.created.emit(this.postText);
+    this.postText = '';
   }
 }

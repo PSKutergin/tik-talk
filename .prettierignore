@@ -1,0 +1,21 @@
+# Игнорирование папок
+node_modules/
+dist/
+build/
+coverage/
+.vscode/
+
+# Игнорирование минифицированных и скомпилированных файлов
+*.min.js
+*.min.css
+*.bundle.js
+*.bundle.css
+
+# Игнорирование файлов конфигурации
+angular.json
+tsconfig.json
+webpack.config.js
+
+# Игнорирование тестов (опционально)
+*.test.js
+*.spec.ts

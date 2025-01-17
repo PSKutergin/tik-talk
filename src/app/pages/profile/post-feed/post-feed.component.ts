@@ -1,6 +1,14 @@
-import { AfterViewInit, Component, DestroyRef, ElementRef, inject, OnDestroy, Renderer2 } from '@angular/core';
-import { PostInputComponent } from "../post-input/post-input.component";
-import { PostComponent } from "../post/post.component";
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  OnDestroy,
+  Renderer2
+} from '@angular/core';
+import { PostInputComponent } from '../post-input/post-input.component';
+import { PostComponent } from '../post/post.component';
 import { PostService } from '@/app/shared/services/post.service';
 import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,36 +21,33 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './post-feed.component.scss'
 })
 export class PostFeedComponent implements AfterViewInit, OnDestroy {
-  r2 = inject(Renderer2)
-  hostElement = inject(ElementRef)
+  r2 = inject(Renderer2);
+  hostElement = inject(ElementRef);
   destroy$ = inject(DestroyRef);
-  feed = this.postService.posts
+  feed = this.postService.posts;
 
   constructor(private postService: PostService) {
-    firstValueFrom(this.postService.getPosts())
+    firstValueFrom(this.postService.getPosts());
   }
 
   ngAfterViewInit(): void {
-    this.resizeFeed()
+    this.resizeFeed();
 
     fromEvent(window, 'resize')
-      .pipe(
-        debounceTime(100),
-        takeUntilDestroyed(this.destroy$)
-      )
+      .pipe(debounceTime(100), takeUntilDestroyed(this.destroy$))
       .subscribe(() => {
-        this.resizeFeed()
-      })
+        this.resizeFeed();
+      });
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 
   resizeFeed(): void {
-    const { top } = this.hostElement.nativeElement.getBoundingClientRect()
+    const { top } = this.hostElement.nativeElement.getBoundingClientRect();
 
-    const height = window.innerHeight - top - 24 - 24
+    const height = window.innerHeight - top - 24 - 24;
 
-    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
+    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
   }
 
   onCreatedPost(data: Record<string, any>) {
@@ -52,6 +57,6 @@ export class PostFeedComponent implements AfterViewInit, OnDestroy {
         content: data['text'],
         authorId: data['authorId']
       })
-    )
+    );
   }
 }

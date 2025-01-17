@@ -1,8 +1,8 @@
-@if(profile(); as profile) {
-<app-avatar-circle [avatarUrl]="profile.avatarUrl"></app-avatar-circle>
+@if (profile(); as profile) {
+  <app-avatar-circle [avatarUrl]="profile.avatarUrl"></app-avatar-circle>
 
-<section class="profile-header__info">
+  <section class="profile-header__info">
     <h1 class="h4">{{ profile.firstName }} {{ profile.lastName }}</h1>
     <span class="regular">{{ profile.username }}</span>
-</section>
+  </section>
 }

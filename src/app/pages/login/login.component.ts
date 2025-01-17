@@ -12,25 +12,37 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-
   isShowPassword = signal<boolean>(false);
 
   loginForm = this.fb.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required]]
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
-  get username() { return this.loginForm.get('username'); }
-  get password() { return this.loginForm.get('password'); }
+  get username() {
+    return this.loginForm.get('username');
+  }
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   onSubmit(): void {
-    if (this.loginForm.valid && this.loginForm.value.username && this.loginForm.value.password) {
-      this.authService.login({
-        username: this.loginForm.value.username,
-        password: this.loginForm.value.password
-      })
+    if (
+      this.loginForm.valid &&
+      this.loginForm.value.username &&
+      this.loginForm.value.password
+    ) {
+      this.authService
+        .login({
+          username: this.loginForm.value.username,
+          password: this.loginForm.value.password
+        })
         .subscribe((data: TokenResponse) => {
           this.router.navigate(['']);
         });

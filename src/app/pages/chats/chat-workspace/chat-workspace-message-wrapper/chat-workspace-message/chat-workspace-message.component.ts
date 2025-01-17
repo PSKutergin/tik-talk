@@ -1,6 +1,12 @@
 import { Message } from '@/app/interfaces/chat.interface';
-import { Component, HostBinding, input, Input, InputSignal } from '@angular/core';
-import { AvatarCircleComponent } from "@/app/shared/components/avatar-circle/avatar-circle.component";
+import {
+  Component,
+  HostBinding,
+  input,
+  Input,
+  InputSignal
+} from '@angular/core';
+import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -11,10 +17,10 @@ import { DatePipe } from '@angular/common';
   styleUrl: './chat-workspace-message.component.scss'
 })
 export class ChatWorkspaceMessageComponent {
-  message: InputSignal<Message> = input.required<Message>()
+  message: InputSignal<Message> = input.required<Message>();
 
   @HostBinding('class.mine')
   get isMine() {
-    return this.message().isMine
+    return this.message().isMine;
   }
 }

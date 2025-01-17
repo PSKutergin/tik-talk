@@ -1,43 +1,49 @@
-@if(profile$ | async; as profile) {
-<header class="profile-page__header">
+@if (profile$ | async; as profile) {
+  <header class="profile-page__header">
     <app-profile-header [profile]="profile"></app-profile-header>
 
-    @if(isMyPage()) {
-    <a [routerLink]="['/settings']" class="btn settings-btn">
+    @if (isMyPage()) {
+      <a [routerLink]="['/settings']" class="btn settings-btn">
         Редактировать
         <svg icon="settings" class="svg16"></svg>
-    </a>
+      </a>
     } @else {
-    <button class="btn settings-btn" (click)="onSendMessage(profile.id)">Написать</button>
+      <button class="btn settings-btn" (click)="onSendMessage(profile.id)">
+        Написать
+      </button>
     }
-</header>
+  </header>
 
-<main class="profile-page__body">
+  <main class="profile-page__body">
     <app-post-feed></app-post-feed>
 
     <section>
-        <h3 class="h6 mb16">Подписчики</h3>
+      <h3 class="h6 mb16">Подписчики</h3>
 
-        <section class="subscribers-wrapper mb32">
-            @for (subscriber of subscribers$ | async; track subscriber.id) {
-            <a class="subscriber-avatar-link" [routerLink]="['/profile', subscriber.id]">
-                <app-avatar-circle [avatarUrl]="subscriber.avatarUrl" class="size32"></app-avatar-circle>
-            </a>
-            }
-            <a class="to-subscribers-search" [routerLink]="['/search']"></a>
-        </section>
+      <section class="subscribers-wrapper mb32">
+        @for (subscriber of subscribers$ | async; track subscriber.id) {
+          <a
+            class="subscriber-avatar-link"
+            [routerLink]="['/profile', subscriber.id]">
+            <app-avatar-circle
+              [avatarUrl]="subscriber.avatarUrl"
+              class="size32"></app-avatar-circle>
+          </a>
+        }
+        <a class="to-subscribers-search" [routerLink]="['/search']"></a>
+      </section>
 
-        <h3 class="h6 mb16">Навыки</h3>
+      <h3 class="h6 mb16">Навыки</h3>
 
-        <section class="stack-wrapper mb32">
-            @for (skill of profile.stack; track skill) {
-            <section class="skill-tag">{{ skill }}</section>
-            }
-        </section>
+      <section class="stack-wrapper mb32">
+        @for (skill of profile.stack; track skill) {
+          <section class="skill-tag">{{ skill }}</section>
+        }
+      </section>
 
-        <h3 class="h6 mb16">О себе</h3>
+      <h3 class="h6 mb16">О себе</h3>
 
-        <p class="medium-text">{{ profile.description }}</p>
+      <p class="medium-text">{{ profile.description }}</p>
     </section>
-</main>
+  </main>
 }

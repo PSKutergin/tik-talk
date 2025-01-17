@@ -1,10 +1,19 @@
-<img [src]="preview()" alt="avatar" class="avatar">
+<img [src]="preview()" alt="avatar" class="avatar" />
 
-<section dnd class="dropzone" (keyup.enter)="fileDrop.click()" (fileDropped)="onFileDropped($event)">
-    <section class="dropzone__content">
-        <svg icon="upload" class="svg24"></svg>
-        <span class="medium-text">Перетащите изображение или Загрузите</span>
-    </section>
+<section
+  dnd
+  class="dropzone"
+  (keyup.enter)="fileDrop.click()"
+  (fileDropped)="onFileDropped($event)">
+  <section class="dropzone__content">
+    <svg icon="upload" class="svg24"></svg>
+    <span class="medium-text">Перетащите изображение или Загрузите</span>
+  </section>
 
-    <input tabindex="-1" type="file" class="dropzone__input" #fileDrop (change)="fileBrowserHandler($event)">
+  <input
+    tabindex="-1"
+    type="file"
+    class="dropzone__input"
+    #fileDrop
+    (change)="fileBrowserHandler($event)" />
 </section>

@@ -1,5 +1,5 @@
-@if(avatarUrl(); as avatarUrl) {
-<img [src]="avatarUrl | imgUrl" alt="avatar">
+@if (avatarUrl(); as avatarUrl) {
+  <img [src]="avatarUrl | imgUrl" alt="avatar" />
 } @else {
-<img src="/assets/images/avatar-placeholder.png" alt="avatar">
+  <img src="/assets/images/avatar-placeholder.png" alt="avatar" />
 }

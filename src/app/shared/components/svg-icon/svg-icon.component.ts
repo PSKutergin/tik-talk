@@ -8,7 +8,6 @@ import { Component, Input } from '@angular/core';
   styles: ''
 })
 export class SvgIconComponent {
-
   @Input() icon: string = '';
 
   get href() {

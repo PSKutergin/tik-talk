@@ -1,8 +1,8 @@
 import { Profile } from '@/app/interfaces/profile.interface';
 import { ProfileService } from '@/app/shared/services/profile.service';
 import { Component } from '@angular/core';
-import { ProfileCardComponent } from "../../shared/components/profile-card/profile-card.component";
-import { ProfileFiltersComponent } from "./profile-filters/profile-filters.component";
+import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
+import { ProfileFiltersComponent } from './profile-filters/profile-filters.component';
 
 @Component({
   selector: 'app-search',
@@ -14,5 +14,5 @@ import { ProfileFiltersComponent } from "./profile-filters/profile-filters.compo
 export class SearchComponent {
   profiles = this.profileService.filteredProfiles;
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService) {}
 }

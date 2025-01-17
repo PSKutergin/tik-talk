@@ -1,56 +1,57 @@
-@if(profile$ | async; as profile) {
-<app-profile-header [profile]="profile"></app-profile-header>
+@if (profile$ | async; as profile) {
+  <app-profile-header [profile]="profile"></app-profile-header>
 }
 
-
 <form class="settings-form" [formGroup]="profileForm">
-    <section class="settings-form__content">
-        <section class="two-columns">
-            <label class="form-label">
-                <span class="form-label__text">Имя</span>
-                <input class="form-input" type="text" formControlName="firstName">
-            </label>
+  <section class="settings-form__content">
+    <section class="two-columns">
+      <label class="form-label">
+        <span class="form-label__text">Имя</span>
+        <input class="form-input" type="text" formControlName="firstName" />
+      </label>
 
-            <label class="form-label">
-                <span class="form-label__text">Фамилия</span>
-                <input class="form-input" type="text" formControlName="lastName">
-            </label>
-        </section>
-
-        <label class="form-label">
-            <span class="form-label__text">Telegram username</span>
-            <input class="form-input" type="text" formControlName="username">
-        </label>
-
-        <label class="form-label">
-            <span class="form-label__text">О себе</span>
-            <textarea class="form-input form-input__textarea" placeholder="Расскажите о себе"
-                formControlName="description"></textarea>
-        </label>
-
-        <label class="form-label">
-            <span class="form-label__text">Аватар</span>
-            <app-avatar-upload></app-avatar-upload>
-        </label>
-
-        <label class="form-label">
-            <span class="form-label__text">Навыки</span>
-            <input class="form-input" type="text" formControlName="stack">
-        </label>
+      <label class="form-label">
+        <span class="form-label__text">Фамилия</span>
+        <input class="form-input" type="text" formControlName="lastName" />
+      </label>
     </section>
 
-    <section class="settings-form__actions">
-        <section class="settings-form__actions-left">
-            <button class="btn-transparent btn-icon">
-                <svg icon="delete" class="svg16 delete"></svg>
-            </button>
-            <button class="btn-transparent btn-icon" (click)="onLogout()">
-                <svg icon="logout" class="svg16 logout"></svg>
-            </button>
-        </section>
-        <section class="settings-form__actions-right">
-            <a class="btn-transparent" [routerLink]="['/profile/me']">Отмена</a>
-            <button class="btn" (click)="onSave()">Сохранить</button>
-        </section>
+    <label class="form-label">
+      <span class="form-label__text">Telegram username</span>
+      <input class="form-input" type="text" formControlName="username" />
+    </label>
+
+    <label class="form-label">
+      <span class="form-label__text">О себе</span>
+      <textarea
+        class="form-input form-input__textarea"
+        placeholder="Расскажите о себе"
+        formControlName="description"></textarea>
+    </label>
+
+    <label class="form-label">
+      <span class="form-label__text">Аватар</span>
+      <app-avatar-upload></app-avatar-upload>
+    </label>
+
+    <label class="form-label">
+      <span class="form-label__text">Навыки</span>
+      <input class="form-input" type="text" formControlName="stack" />
+    </label>
+  </section>
+
+  <section class="settings-form__actions">
+    <section class="settings-form__actions-left">
+      <button class="btn-transparent btn-icon">
+        <svg icon="delete" class="svg16 delete"></svg>
+      </button>
+      <button class="btn-transparent btn-icon" (click)="onLogout()">
+        <svg icon="logout" class="svg16 logout"></svg>
+      </button>
     </section>
+    <section class="settings-form__actions-right">
+      <a class="btn-transparent" [routerLink]="['/profile/me']">Отмена</a>
+      <button class="btn" (click)="onSave()">Сохранить</button>
+    </section>
+  </section>
 </form>

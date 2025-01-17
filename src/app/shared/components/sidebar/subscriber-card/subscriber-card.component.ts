@@ -1,6 +1,6 @@
 import { Profile } from '@/app/interfaces/profile.interface';
 import { Component, Input } from '@angular/core';
-import { AvatarCircleComponent } from "../../avatar-circle/avatar-circle.component";
+import { AvatarCircleComponent } from '../../avatar-circle/avatar-circle.component';
 
 @Component({
   selector: 'app-subscriber-card',
@@ -10,5 +10,5 @@ import { AvatarCircleComponent } from "../../avatar-circle/avatar-circle.compone
   styleUrl: './subscriber-card.component.scss'
 })
 export class SubscriberCardComponent {
-  @Input() profile!: Profile
+  @Input() profile!: Profile;
 }

@@ -8,16 +8,17 @@ import { canActivateAuth } from '@/app/core/auth/auth.guard';
 import { chatsRoutes } from '@/app/pages/chats/chatsRoutes';
 
 export const routes: Routes = [
-    {
-        path: '', component: LayoutComponent, children:
-            [
-                { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
-                { path: 'profile/:id', component: ProfileComponent },
-                { path: 'settings', component: SettingsComponent },
-                { path: 'chats', loadChildren: () => chatsRoutes },
-                { path: 'search', component: SearchComponent },
-            ],
-        canActivate: [canActivateAuth]
-    },
-    { path: 'login', component: LoginComponent }
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
+      { path: 'profile/:id', component: ProfileComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'chats', loadChildren: () => chatsRoutes },
+      { path: 'search', component: SearchComponent }
+    ],
+    canActivate: [canActivateAuth]
+  },
+  { path: 'login', component: LoginComponent }
 ];

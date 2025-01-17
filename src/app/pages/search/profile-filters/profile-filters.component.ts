@@ -12,14 +12,16 @@ import { debounce, debounceTime, startWith, switchMap } from 'rxjs';
   styleUrl: './profile-filters.component.scss'
 })
 export class ProfileFiltersComponent {
-
   searchForm = this.fb.group({
     firstName: [''],
     lastName: [''],
     stack: ['']
-  })
+  });
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService) {
+  constructor(
+    private fb: FormBuilder,
+    private profileService: ProfileService
+  ) {
     this.searchForm.valueChanges
       .pipe(
         startWith({}),
@@ -27,6 +29,6 @@ export class ProfileFiltersComponent {
         switchMap((value) => this.profileService.filterProfiles(value)),
         takeUntilDestroyed()
       )
-      .subscribe()
+      .subscribe();
   }
 }

@@ -1,12 +1,14 @@
-@if(comment(); as comment) {
-<app-avatar-circle [avatarUrl]="comment.author.avatarUrl" class="size32"></app-avatar-circle>
+@if (comment(); as comment) {
+  <app-avatar-circle
+    [avatarUrl]="comment.author.avatarUrl"
+    class="size32"></app-avatar-circle>
 
-<main class="comment-body">
+  <main class="comment-body">
     <header class="comment-header">
-        <span class="medium-text">{{ comment.author.username }}</span>
-        <span class="medium-text">{{ comment.createdAt | timeFormat }}</span>
+      <span class="medium-text">{{ comment.author.username }}</span>
+      <span class="medium-text">{{ comment.createdAt | timeFormat }}</span>
     </header>
 
     <p class="medium-text">{{ comment.text }}</p>
-</main>
+  </main>
 }

@@ -11,7 +11,7 @@ import { Component, signal } from '@angular/core';
 })
 export class AvatarUploadComponent {
   preview = signal<string>('/assets/images/avatar-placeholder.png');
-  avatar: File | null = null
+  avatar: File | null = null;
 
   fileBrowserHandler(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -28,12 +28,12 @@ export class AvatarUploadComponent {
 
     const reader = new FileReader();
 
-    reader.onload = event => {
+    reader.onload = (event) => {
       this.preview.set(event.target?.result?.toString() ?? '');
-    }
+    };
 
     reader.readAsDataURL(file);
 
-    this.avatar = file
+    this.avatar = file;
   }
 }

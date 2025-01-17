@@ -5,7 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class TimeFormatPipe implements PipeTransform {
-
   transform(value: string | null): string | null {
     if (!value) return null;
 
