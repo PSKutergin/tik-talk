@@ -3,7 +3,7 @@
 
 <section class="message-container">
     <strong class="medium-text mb8">
-        {{ message.user?.firstName }} {{ message.user?.lastName }} {{ message.createdAt | date: 'HH:mm' }}
+        {{ message.user?.firstName }} {{ message.user?.lastName }} {{ message.createdAt }}
     </strong>
     <section class="message-text medium-text">{{ message.text }}</section>
 </section>

@@ -23,7 +23,7 @@ export class ChatWorkspaceMessageWrapperComponent implements OnInit, OnDestroy, 
 
   constructor(private chatService: ChatService) { }
 
-  messages = this.chatService.activeChatMessages
+  messagesGroups = this.chatService.activeChatMessages
 
   ngOnInit(): void {
     this.scrollMessages()

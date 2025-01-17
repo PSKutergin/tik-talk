@@ -1,7 +1,11 @@
 <section class="message-wrapper mb16" #messageWrapper>
-    @for(message of messages(); track message.id) {
+    @for(group of messagesGroups(); track group.date) {
+    <section class="message-date">{{ group.date }}</section>
+    @for(message of group.messages; track message.id) {
     <app-chat-workspace-message [message]="message"></app-chat-workspace-message>
     }
+    }
+
 </section>
 
 
