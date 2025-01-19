@@ -63,8 +63,9 @@ export class SettingsComponent {
       );
     }
 
-    //@ts-ignore
+
     firstValueFrom(
+      //@ts-ignore
       this.profileService.updateProfile({
         ...this.profileForm.value,
         stack: this.splitStack(this.profileForm.value.stack)
