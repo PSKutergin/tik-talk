@@ -19,3 +19,5 @@ webpack.config.js
 # Игнорирование тестов (опционально)
 *.test.js
 *.spec.ts
+
+.angular

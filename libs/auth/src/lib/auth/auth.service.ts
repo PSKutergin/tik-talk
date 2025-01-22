@@ -1,5 +1,5 @@
-import { TokenResponse } from '@/app/interfaces/auth.interface';
 import { environment } from '@/environments/environment';
+import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,7 +17,7 @@ export class AuthService {
     private http: HttpClient,
     private cookiesService: CookieService,
     private router: Router
-  ) {}
+  ) { }
 
   get isAuth(): boolean {
     if (!this.token) {

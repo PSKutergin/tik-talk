@@ -4,7 +4,7 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from './auth.service';
 import {
   BehaviorSubject,
   catchError,
@@ -15,7 +15,7 @@ import {
   tap,
   throwError
 } from 'rxjs';
-import { TokenResponse } from '@/app/interfaces/auth.interface';
+import { TokenResponse } from './auth.interface';
 
 let isRefreshing$ = new BehaviorSubject<boolean>(false);
 

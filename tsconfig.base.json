@@ -20,7 +20,7 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@tt/auth": ["libs/auth/src/index.ts"]
     },
     "rootDir": "."
   },

@@ -1,5 +1,4 @@
-import { AuthService } from '@/app/core/auth/auth.service';
-import { TokenResponse } from '@/app/interfaces/auth.interface';
+import { AuthService, TokenResponse } from '@tt/auth';
 import { Component, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +22,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   get username() {
     return this.loginForm.get('username');

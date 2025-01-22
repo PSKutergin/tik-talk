@@ -6,9 +6,9 @@ import { RouterLink } from '@angular/router';
 import { ProfileService } from '@/app/shared/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { AuthService } from '@/app/core/auth/auth.service';
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { AsyncPipe } from '@angular/common';
+import { AuthService } from '@tt/auth';
 
 @Component({
   selector: 'app-settings',
