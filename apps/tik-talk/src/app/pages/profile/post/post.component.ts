@@ -1,12 +1,12 @@
-import { Comment, Post } from '@/app/interfaces/post.interface';
-import { Component, input, OnInit, Output, signal } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
-import { PostInputComponent } from '@/app/pages/profile/post-input/post-input.component';
-import { CommentComponent } from '@/app/pages/profile/post/comment/comment.component';
-import { PostService } from '@/app/shared/services/post.service';
 import { firstValueFrom } from 'rxjs';
-import { TimeFormatPipe } from '@/app/shared/pipes/time-format.pipe';
+import { Component, input, OnInit, signal } from '@angular/core';
+import { AvatarCircleComponent } from '../../../shared/components/avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
+import { PostInputComponent } from '../../../pages/profile/post-input/post-input.component';
+import { CommentComponent } from '../../../pages/profile/post/comment/comment.component';
+import { PostService } from '../../../shared/services/post.service';
+import { Comment, Post } from '../../../interfaces/post.interface';
+import { TimeFormatPipe } from '../../../shared/pipes/time-format.pipe';
 
 @Component({
   selector: 'app-post',
@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
   post = input<Post>();
   comments = signal<Comment[]>([]);
 
-  constructor(private postService: PostService) {}
+  constructor(private postService: PostService) { }
 
   ngOnInit() {
     this.comments.set(

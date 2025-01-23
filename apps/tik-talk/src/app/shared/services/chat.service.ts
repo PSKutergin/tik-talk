@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { environment } from '@/environments/environment';
+import { map, Observable } from 'rxjs';
+import { Profile } from '../../interfaces/profile.interface';
 import {
   Chat,
   LastMessageResponse,
   Message
-} from '@/app/interfaces/chat.interface';
-import { map, Observable } from 'rxjs';
-import { Profile } from '@/app/interfaces/profile.interface';
+} from '../../interfaces/chat.interface';
+import { environment } from '../../../environments/environment';
 import { ProfileService } from './profile.service';
 import { DateTime } from 'luxon';
 
@@ -20,7 +20,7 @@ export class ChatService {
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getMyChats(): Observable<LastMessageResponse[]> {
     return this.http.get<LastMessageResponse[]>(

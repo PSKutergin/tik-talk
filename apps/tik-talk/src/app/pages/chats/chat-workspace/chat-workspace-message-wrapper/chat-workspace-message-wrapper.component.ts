@@ -12,12 +12,12 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
-import { MessageInputComponent } from '@/app/shared/components/message-input/message-input.component';
-import { Chat } from '@/app/interfaces/chat.interface';
-import { ChatService } from '@/app/shared/services/chat.service';
 import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
+import { MessageInputComponent } from '../../../../shared/components/message-input/message-input.component';
+import { Chat } from '../../../../interfaces/chat.interface';
+import { ChatService } from '../../../../shared/services/chat.service';
 
 @Component({
   selector: 'app-chat-workspace-message-wrapper',
@@ -27,8 +27,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './chat-workspace-message-wrapper.component.scss'
 })
 export class ChatWorkspaceMessageWrapperComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
-{
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   r2 = inject(Renderer2);
   hostElement = inject(ElementRef);
   destroy$ = inject(DestroyRef);
@@ -36,7 +35,7 @@ export class ChatWorkspaceMessageWrapperComponent
 
   @ViewChild('messageWrapper') messageWrapper!: ElementRef;
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) { }
 
   messagesGroups = this.chatService.activeChatMessages;
 
@@ -58,7 +57,7 @@ export class ChatWorkspaceMessageWrapperComponent
     this.scrollMessages();
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   resizeFeed(): void {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect();

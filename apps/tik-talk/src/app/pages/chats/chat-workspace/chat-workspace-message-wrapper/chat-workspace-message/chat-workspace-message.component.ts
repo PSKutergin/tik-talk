@@ -1,4 +1,3 @@
-import { Message } from '@/app/interfaces/chat.interface';
 import {
   Component,
   HostBinding,
@@ -6,8 +5,9 @@ import {
   Input,
   InputSignal
 } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
 import { DatePipe } from '@angular/common';
+import { Message } from '../../../../../interfaces/chat.interface';
+import { AvatarCircleComponent } from '../../../../../shared/components/avatar-circle/avatar-circle.component';
 
 @Component({
   selector: 'app-chat-workspace-message',

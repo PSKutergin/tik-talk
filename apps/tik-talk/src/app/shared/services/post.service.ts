@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { environment } from '@/environments/environment';
+import { environment } from '../../../environments/environment';
 import {
   Comment,
   CommentCreateDto,
   Post,
   PostCreateDto
-} from '@/app/interfaces/post.interface';
+} from '../../interfaces/post.interface';
 import { map, Observable, switchMap, tap } from 'rxjs';
 
 @Injectable({
@@ -15,7 +15,7 @@ import { map, Observable, switchMap, tap } from 'rxjs';
 export class PostService {
   posts: WritableSignal<Post[]> = signal<Post[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
     return this.http

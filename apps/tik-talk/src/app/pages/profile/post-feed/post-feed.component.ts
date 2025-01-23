@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { PostInputComponent } from '../post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
-import { PostService } from '@/app/shared/services/post.service';
+import { PostService } from '../../../shared/services/post.service';
 import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -40,7 +40,7 @@ export class PostFeedComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   resizeFeed(): void {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect();

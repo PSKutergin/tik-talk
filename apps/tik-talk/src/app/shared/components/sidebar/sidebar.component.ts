@@ -1,11 +1,11 @@
 import { Component, WritableSignal } from '@angular/core';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ProfileService } from '@/app/shared/services/profile.service';
+import { ProfileService } from '../../services/profile.service';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
-import { Profile } from '@/app/interfaces/profile.interface';
+import { Profile } from '../../../interfaces/profile.interface';
 import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 
 @Component({
@@ -44,7 +44,7 @@ export class SidebarComponent {
     }
   ];
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
     firstValueFrom(this.profileService.getMe());

@@ -1,9 +1,9 @@
-import { Pageble } from '@/app/interfaces/pageble.interface';
-import { Profile } from '@/app/interfaces/profile.interface';
-import { environment } from '@/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
+import { Pageble } from '../../interfaces/pageble.interface';
+import { Profile } from '../../interfaces/profile.interface';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class ProfileService {
   me = signal<Profile | null>(null);
   filteredProfiles = signal<Profile[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getMe(): Observable<Profile> {
     return this.http

@@ -1,4 +1,3 @@
-import { ProfileService } from '@/app/shared/services/profile.service';
 import {
   Component,
   EventEmitter,
@@ -8,9 +7,10 @@ import {
   Output,
   Renderer2
 } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
 import { FormsModule } from '@angular/forms';
+import { AvatarCircleComponent } from '../../../shared/components/avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
+import { ProfileService } from '../../../shared/services/profile.service';
 
 @Component({
   selector: 'app-post-input',

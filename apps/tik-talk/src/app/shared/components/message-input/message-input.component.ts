@@ -1,15 +1,13 @@
-import { ProfileService } from '@/app/shared/services/profile.service';
+import { ProfileService } from '../../services/profile.service';
 import {
   Component,
   EventEmitter,
-  HostBinding,
   inject,
-  input,
   Output,
   Renderer2
 } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
+import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({

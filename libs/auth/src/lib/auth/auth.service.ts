@@ -1,4 +1,4 @@
-import { environment } from '@/environments/environment';
+import { environment } from '../../../../../apps/tik-talk/src/environments/environment';
 import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

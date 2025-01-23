@@ -1,7 +1,7 @@
-import { Comment } from '@/app/interfaces/post.interface';
 import { Component, input } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { TimeFormatPipe } from '@/app/shared/pipes/time-format.pipe';
+import { AvatarCircleComponent } from '../../../../shared/components/avatar-circle/avatar-circle.component';
+import { TimeFormatPipe } from '../../../../shared/pipes/time-format.pipe';
+import { Comment } from '../../../../interfaces/post.interface';
 
 @Component({
   selector: 'app-comment',

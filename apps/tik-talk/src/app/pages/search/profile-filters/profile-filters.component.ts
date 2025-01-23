@@ -1,8 +1,8 @@
-import { ProfileService } from '@/app/shared/services/profile.service';
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { debounce, debounceTime, startWith, switchMap } from 'rxjs';
+import { ProfileService } from '../../../shared/services/profile.service';
 
 @Component({
   selector: 'app-profile-filters',

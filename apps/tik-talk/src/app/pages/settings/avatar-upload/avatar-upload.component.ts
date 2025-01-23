@@ -1,6 +1,6 @@
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
-import { DndDirective } from '@/app/shared/directives/dnd.directive';
 import { Component, signal } from '@angular/core';
+import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
+import { DndDirective } from '../../../shared/directives/dnd.directive';
 
 @Component({
   selector: 'app-avatar-upload',

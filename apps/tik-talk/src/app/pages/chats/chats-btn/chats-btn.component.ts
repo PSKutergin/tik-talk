@@ -1,7 +1,7 @@
 import { Component, inject, input } from '@angular/core';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { LastMessageResponse } from '@/app/interfaces/chat.interface';
 import { DatePipe } from '@angular/common';
+import { AvatarCircleComponent } from '../../../shared/components/avatar-circle/avatar-circle.component';
+import { LastMessageResponse } from '../../../interfaces/chat.interface';
 
 @Component({
   selector: 'button[chats]',

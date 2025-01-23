@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
-import { ChatService } from '@/app/shared/services/chat.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { map, startWith, switchMap } from 'rxjs';
+import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
+import { ChatService } from '../../../shared/services/chat.service';
 
 @Component({
   selector: 'app-chats-list',
@@ -22,7 +22,7 @@ import { map, startWith, switchMap } from 'rxjs';
 export class ChatsListComponent {
   filterFormControl = new FormControl('');
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService) { }
 
   chats$ = this.chatService.getMyChats().pipe(
     switchMap((chats) => {
@@ -31,10 +31,10 @@ export class ChatsListComponent {
         map((value) =>
           value
             ? chats.filter((chat) =>
-                `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-                  .toLowerCase()
-                  .includes(value.toLowerCase() || '')
-              )
+              `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
+                .toLowerCase()
+                .includes(value.toLowerCase() || '')
+            )
             : chats
         )
       );

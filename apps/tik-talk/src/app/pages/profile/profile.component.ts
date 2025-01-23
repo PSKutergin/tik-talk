@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { ProfileHeaderComponent } from '@/app/shared/components/profile-header/profile-header.component';
-import { ProfileService } from '@/app/shared/services/profile.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
 import { PostFeedComponent } from './post-feed/post-feed.component';
-import { AvatarCircleComponent } from '@/app/shared/components/avatar-circle/avatar-circle.component';
-import { ChatService } from '@/app/shared/services/chat.service';
+import { SvgIconComponent } from '../../shared/components/svg-icon/svg-icon.component';
+import { AvatarCircleComponent } from '../../shared/components/avatar-circle/avatar-circle.component';
+import { ChatService } from '../../shared/services/chat.service';
+import { ProfileHeaderComponent } from '../../shared/components/profile-header/profile-header.component';
+import { ProfileService } from '../../shared/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -30,7 +30,7 @@ export class ProfileComponent {
     private chatService: ChatService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
   me$ = toObservable(this.profileService.me);

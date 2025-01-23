@@ -2,11 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": [],
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["*"]
-    }
+    "types": []
+    // "baseUrl": "./src",
+    // "paths": {
+    //   "@/*": ["*"]
+    // }
   },
   "files": ["src/main.ts"],
   "include": ["src/**/*.d.ts"]

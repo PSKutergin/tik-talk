@@ -9,7 +9,6 @@ import {
   BehaviorSubject,
   catchError,
   filter,
-  finalize,
   Observable,
   switchMap,
   tap,

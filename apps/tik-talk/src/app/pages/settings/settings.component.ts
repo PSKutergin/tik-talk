@@ -1,14 +1,14 @@
 import { Component, effect, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProfileHeaderComponent } from '@/app/shared/components/profile-header/profile-header.component';
-import { SvgIconComponent } from '@/app/shared/components/svg-icon/svg-icon.component';
 import { RouterLink } from '@angular/router';
-import { ProfileService } from '@/app/shared/services/profile.service';
 import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@tt/auth';
+import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
+import { ProfileHeaderComponent } from '../../shared/components/profile-header/profile-header.component';
+import { SvgIconComponent } from '../../shared/components/svg-icon/svg-icon.component';
+import { ProfileService } from '../../shared/services/profile.service';
 
 @Component({
   selector: 'app-settings',

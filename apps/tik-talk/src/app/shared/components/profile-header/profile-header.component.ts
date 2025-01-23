@@ -1,6 +1,5 @@
-import { Profile } from '@/app/interfaces/profile.interface';
+import { Profile } from '../../../interfaces/profile.interface';
 import { Component, input } from '@angular/core';
-import { ImgUrlPipe } from '@/app/shared/pipes/img-url.pipe';
 import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
 
 @Component({
