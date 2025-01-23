@@ -43,8 +43,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "apps/tik-talk/src/environments/environment.ts",
-              "with": "apps/tik-talk/src/environments/environment.prod.ts"
+              "replace": "libs/shared/src/environments/environment.ts",
+              "with": "libs/shared/src/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"

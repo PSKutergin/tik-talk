@@ -22,7 +22,7 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   get username() {
     return this.loginForm.get('username');

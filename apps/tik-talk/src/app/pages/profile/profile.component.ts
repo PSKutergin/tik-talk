@@ -3,12 +3,11 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { PostFeedComponent } from './post-feed/post-feed.component';
-import { SvgIconComponent } from '../../shared/components/svg-icon/svg-icon.component';
-import { AvatarCircleComponent } from '../../shared/components/avatar-circle/avatar-circle.component';
+import { PostFeedComponent } from '@tt/posts';
+import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
+import { ProfileService } from '@tt/profile';
 import { ChatService } from '../../shared/services/chat.service';
 import { ProfileHeaderComponent } from '../../shared/components/profile-header/profile-header.component';
-import { ProfileService } from '../../shared/services/profile.service';
 
 @Component({
   selector: 'app-profile',

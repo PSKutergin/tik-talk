@@ -1,12 +1,10 @@
 import { Component, WritableSignal } from '@angular/core';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
-import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { ProfileService } from '../../services/profile.service';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
-import { Profile } from '../../../interfaces/profile.interface';
-import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
+import { ProfileService, Profile } from '@tt/profile';
+import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
+import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 
 @Component({
   selector: 'app-sidebar',

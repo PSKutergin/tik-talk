@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProfileCardComponent } from '../../shared/components/profile-card/profile-card.component';
 import { ProfileFiltersComponent } from './profile-filters/profile-filters.component';
-import { ProfileService } from '../../shared/services/profile.service';
+import { ProfileService } from '@tt/profile';
 
 @Component({
   selector: 'app-search',

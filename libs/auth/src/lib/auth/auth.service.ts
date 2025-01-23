@@ -1,4 +1,4 @@
-import { environment } from '../../../../../apps/tik-talk/src/environments/environment';
+import { environment } from '../../../../shared/src/lib/environments/environment';
 import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -17,7 +17,7 @@ export class AuthService {
     private http: HttpClient,
     private cookiesService: CookieService,
     private router: Router
-  ) { }
+  ) {}
 
   get isAuth(): boolean {
     if (!this.token) {

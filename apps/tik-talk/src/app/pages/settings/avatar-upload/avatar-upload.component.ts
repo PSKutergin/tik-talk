@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { SvgIconComponent } from '../../../shared/components/svg-icon/svg-icon.component';
+import { SvgIconComponent } from '@tt/common';
 import { DndDirective } from '../../../shared/directives/dnd.directive';
 
 @Component({

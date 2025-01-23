@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Profile } from '../../interfaces/profile.interface';
+import { DateTime } from 'luxon';
+import { environment } from '@tt/shared';
+import { Profile, ProfileService } from '@tt/profile';
 import {
   Chat,
   LastMessageResponse,
   Message
 } from '../../interfaces/chat.interface';
-import { environment } from '../../../environments/environment';
-import { ProfileService } from './profile.service';
-import { DateTime } from 'luxon';
 
 @Injectable({
   providedIn: 'root'

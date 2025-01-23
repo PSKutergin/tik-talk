@@ -27,7 +27,8 @@ import { ChatService } from '../../../../shared/services/chat.service';
   styleUrl: './chat-workspace-message-wrapper.component.scss'
 })
 export class ChatWorkspaceMessageWrapperComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+{
   r2 = inject(Renderer2);
   hostElement = inject(ElementRef);
   destroy$ = inject(DestroyRef);
@@ -35,7 +36,7 @@ export class ChatWorkspaceMessageWrapperComponent
 
   @ViewChild('messageWrapper') messageWrapper!: ElementRef;
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) {}
 
   messagesGroups = this.chatService.activeChatMessages;
 
@@ -57,7 +58,7 @@ export class ChatWorkspaceMessageWrapperComponent
     this.scrollMessages();
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 
   resizeFeed(): void {
     const { top } = this.hostElement.nativeElement.getBoundingClientRect();

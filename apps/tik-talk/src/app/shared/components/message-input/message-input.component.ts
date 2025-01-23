@@ -1,4 +1,4 @@
-import { ProfileService } from '../../services/profile.service';
+import { FormsModule } from '@angular/forms';
 import {
   Component,
   EventEmitter,
@@ -6,9 +6,9 @@ import {
   Output,
   Renderer2
 } from '@angular/core';
-import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
-import { FormsModule } from '@angular/forms';
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common';
+import { ProfileService } from '@tt/profile';
+
 
 @Component({
   selector: 'app-message-input',

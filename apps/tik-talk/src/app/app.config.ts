@@ -4,7 +4,6 @@ import { provideRouter } from '@angular/router';
 import { authInterceptor } from '@tt/auth';
 import { routes } from './app.routes';
 
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),

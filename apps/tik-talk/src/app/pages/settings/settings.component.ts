@@ -5,20 +5,20 @@ import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@tt/auth';
+import { ProfileService } from '@tt/profile';
+import { SvgIconComponent } from '@tt/common';
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 import { ProfileHeaderComponent } from '../../shared/components/profile-header/profile-header.component';
-import { SvgIconComponent } from '../../shared/components/svg-icon/svg-icon.component';
-import { ProfileService } from '../../shared/services/profile.service';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
   imports: [
     SvgIconComponent,
+    AvatarUploadComponent,
     ProfileHeaderComponent,
     ReactiveFormsModule,
     RouterLink,
-    AvatarUploadComponent,
     AsyncPipe
   ],
   templateUrl: './settings.component.html',

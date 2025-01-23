@@ -21,7 +21,7 @@ export class ChatWorkspaceComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private chatService: ChatService
-  ) { }
+  ) {}
 
   activeChat$ = this.activatedRoute.params.pipe(
     switchMap(({ id }) => this.chatService.getChatById(Number(id)))
