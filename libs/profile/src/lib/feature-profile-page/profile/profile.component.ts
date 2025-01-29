@@ -1,13 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { firstValueFrom, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { PostFeedComponent } from '@tt/posts';
 import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
-import { ProfileService } from '@tt/profile';
-import { ChatService } from '@tt/chats';
-import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
+import { ProfileService } from '../../data';
+import { ProfileHeaderComponent } from '../../ui';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +25,6 @@ import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.c
 export class ProfileComponent {
   constructor(
     private profileService: ProfileService,
-    private chatService: ChatService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -46,8 +44,6 @@ export class ProfileComponent {
   );
 
   async onSendMessage(userId: number) {
-    firstValueFrom(this.chatService.createdChat(userId)).then((res) =>
-      this.router.navigate(['/chats', res.id])
-    );
+    this.router.navigate(['/chats', 'new'], { queryParams: { userId } });
   }
 }

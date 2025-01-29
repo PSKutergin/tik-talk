@@ -2,9 +2,10 @@ import { Component, WritableSignal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService, Profile } from '@tt/profile';
+import { ProfileService } from '@tt/profile';
 import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
+import { Profile } from '@tt/interfaces/profile';
 
 @Component({
   selector: 'app-sidebar',

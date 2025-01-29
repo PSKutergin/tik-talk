@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AvatarCircleComponent } from '@tt/common';
-import { Profile } from '@tt/profile';
+import { Profile } from '@tt/interfaces/profile';
 
 @Component({
   selector: 'app-subscriber-card',

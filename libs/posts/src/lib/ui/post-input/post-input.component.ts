@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarCircleComponent, SvgIconComponent } from '@tt/common';
-import { ProfileService } from '@tt/profile';
+import { GlobalStoreService } from '@tt/shared';
 
 @Component({
   selector: 'app-post-input',
@@ -20,9 +20,9 @@ import { ProfileService } from '@tt/profile';
 })
 export class PostInputComponent {
   r2: Renderer2 = inject(Renderer2);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
   isCommentInput = input<boolean>(false);
-  postText: string = '';
+  postText = '';
 
   @Output() created = new EventEmitter<Record<string, any>>();
 
@@ -41,7 +41,7 @@ export class PostInputComponent {
   onCreate() {
     if (!this.postText) return;
 
-    this.created.emit({ text: this.postText, authorId: this.profile()!.id });
+    this.created.emit({ text: this.postText, authorId: this.profile()?.id });
     this.postText = '';
   }
 }

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { environment } from '@tt/shared';
+import { environment, GlobalStoreService } from '@tt/shared';
 import { Pageble } from '@tt/shared';
-import { Profile } from '../index';
+import { Profile } from '@tt/interfaces/profile';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,18 @@ export class ProfileService {
   me = signal<Profile | null>(null);
   filteredProfiles = signal<Profile[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private globalStoreService: GlobalStoreService
+  ) { }
 
   getMe(): Observable<Profile> {
     return this.http
       .get<Profile>(environment.api + 'account/me')
-      .pipe(tap((data: Profile) => this.me.set(data)));
+      .pipe(tap((data: Profile) => {
+        this.me.set(data);
+        this.globalStoreService.me.set(data);
+      }));
   }
 
   getTestProfiles(): Observable<Profile[]> {

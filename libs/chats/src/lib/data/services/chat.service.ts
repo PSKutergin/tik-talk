@@ -3,12 +3,13 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { DateTime } from 'luxon';
 import { environment } from '@tt/shared';
-import { Profile, ProfileService } from '@tt/profile';
+import { ProfileService } from '@tt/profile';
 import {
   Chat,
   LastMessageResponse,
   Message
 } from '../interfaces/chat.interface';
+import { Profile } from '@tt/interfaces/profile';
 
 @Injectable({
   providedIn: 'root'

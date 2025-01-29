@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { canActivateAuth, LoginComponent } from '@tt/auth';
 import { ProfileComponent, SettingsComponent, SearchComponent } from '@tt/profile';
 import { chatsRoutes } from '@tt/chats';
-import { LayoutComponent } from './shared/components/layout/layout.component';
+import { LayoutComponent } from '@tt/layout';
 
 
 export const routes: Routes = [
