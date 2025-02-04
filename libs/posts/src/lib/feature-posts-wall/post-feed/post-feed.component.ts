@@ -1,17 +1,15 @@
 import {
   AfterViewInit,
   Component,
-  DestroyRef,
   ElementRef,
   inject,
   OnDestroy,
-  Renderer2
 } from '@angular/core';
-import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { firstValueFrom, Subscription } from 'rxjs';
 import { PostInputComponent } from '../../ui';
 import { PostService } from '../../data';
 import { PostComponent } from '../post/post.component';
+import { ResizeService } from '@tt/shared';
 
 @Component({
   selector: 'app-post-feed',
@@ -21,33 +19,30 @@ import { PostComponent } from '../post/post.component';
   styleUrl: './post-feed.component.scss'
 })
 export class PostFeedComponent implements AfterViewInit, OnDestroy {
-  r2 = inject(Renderer2);
   hostElement = inject(ElementRef);
-  destroy$ = inject(DestroyRef);
   feed = this.postService.posts;
+  private resizeSubscription: Subscription = Subscription.EMPTY;
 
-  constructor(private postService: PostService) {
+  constructor(
+    private resizeService: ResizeService,
+    private postService: PostService
+  ) {
     firstValueFrom(this.postService.getPosts());
   }
 
   ngAfterViewInit(): void {
-    this.resizeFeed();
-
-    fromEvent(window, 'resize')
-      .pipe(debounceTime(100), takeUntilDestroyed(this.destroy$))
+    this.resizeService.resizeElement(this.hostElement);
+    this.resizeSubscription = this.resizeService
+      .onResize(100)
       .subscribe(() => {
-        this.resizeFeed();
+        this.resizeService.resizeElement(this.hostElement);
       });
   }
 
-  ngOnDestroy(): void {}
-
-  resizeFeed(): void {
-    const { top } = this.hostElement.nativeElement.getBoundingClientRect();
-
-    const height = window.innerHeight - top - 24 - 24;
-
-    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
+  ngOnDestroy(): void {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
   onCreatedPost(data: Record<string, any>) {

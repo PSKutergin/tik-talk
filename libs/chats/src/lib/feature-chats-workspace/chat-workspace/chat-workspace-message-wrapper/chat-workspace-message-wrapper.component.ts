@@ -2,21 +2,19 @@ import {
   AfterViewChecked,
   AfterViewInit,
   Component,
-  DestroyRef,
   ElementRef,
   inject,
   input,
   InputSignal,
   OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild
 } from '@angular/core';
-import { debounceTime, firstValueFrom, fromEvent } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { firstValueFrom, Subscription } from 'rxjs';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../ui';
 import { Chat, ChatService } from '../../../data';
+import { ResizeService } from '@tt/shared';
 
 @Component({
   selector: 'app-chat-workspace-message-wrapper',
@@ -26,16 +24,17 @@ import { Chat, ChatService } from '../../../data';
   styleUrl: './chat-workspace-message-wrapper.component.scss'
 })
 export class ChatWorkspaceMessageWrapperComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
-{
-  r2 = inject(Renderer2);
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
   hostElement = inject(ElementRef);
-  destroy$ = inject(DestroyRef);
   chat: InputSignal<Chat> = input.required<Chat>();
+  private resizeSubscription: Subscription = Subscription.EMPTY;
 
   @ViewChild('messageWrapper') messageWrapper!: ElementRef;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private resizeService: ResizeService,
+    private chatService: ChatService
+  ) { }
 
   messagesGroups = this.chatService.activeChatMessages;
 
@@ -44,12 +43,11 @@ export class ChatWorkspaceMessageWrapperComponent
   }
 
   ngAfterViewInit(): void {
-    this.resizeFeed();
-
-    fromEvent(window, 'resize')
-      .pipe(debounceTime(100), takeUntilDestroyed(this.destroy$))
+    this.resizeService.resizeElement(this.hostElement);
+    this.resizeSubscription = this.resizeService
+      .onResize(100)
       .subscribe(() => {
-        this.resizeFeed();
+        this.resizeService.resizeElement(this.hostElement);
       });
   }
 
@@ -57,14 +55,10 @@ export class ChatWorkspaceMessageWrapperComponent
     this.scrollMessages();
   }
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method, @typescript-eslint/no-empty-function
-  ngOnDestroy(): void {}
-
-  resizeFeed(): void {
-    const { top } = this.hostElement.nativeElement.getBoundingClientRect();
-    const height = window.innerHeight - top - 24;
-
-    this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`);
+  ngOnDestroy(): void {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
   }
 
   scrollMessages() {

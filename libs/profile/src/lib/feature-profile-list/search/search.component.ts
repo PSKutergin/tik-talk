@@ -1,8 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { selectFilteredProfiles } from '../../data';
 import { ProfileCardComponent } from '../../ui';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
-import { Store } from '@ngrx/store';
+import { ResizeService } from '@tt/shared';
+
+
 
 @Component({
   selector: 'app-search',
@@ -11,9 +15,28 @@ import { Store } from '@ngrx/store';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchComponent implements AfterViewInit, OnDestroy {
   store = inject(Store);
+  hostElement = inject(ElementRef);
   profiles = this.store.selectSignal(selectFilteredProfiles);
+  private resizeSubscription: Subscription = Subscription.EMPTY;
 
-  constructor() {}
+  constructor(
+    private resizeService: ResizeService,
+  ) { }
+
+  ngAfterViewInit(): void {
+    this.resizeService.resizeElement(this.hostElement);
+    this.resizeSubscription = this.resizeService
+      .onResize(100)
+      .subscribe(() => {
+        this.resizeService.resizeElement(this.hostElement);
+      });
+  }
+
+  ngOnDestroy(): void {
+    if (this.resizeSubscription) {
+      this.resizeSubscription.unsubscribe();
+    }
+  }
 }
