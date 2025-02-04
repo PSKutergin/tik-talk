@@ -13,14 +13,14 @@ import { map, Observable, switchMap, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  posts: WritableSignal<Post[]> = signal<Post[]>([]);
+  // posts: WritableSignal<Post[]> = signal<Post[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
     return this.http
       .get<Post[]>(environment.api + 'post/')
-      .pipe(tap((data: Post[]) => this.posts.set(data)));
+    // .pipe(tap((data: Post[]) => this.posts.set(data)));
   }
 
   createPost(data: PostCreateDto): Observable<Post[]> {

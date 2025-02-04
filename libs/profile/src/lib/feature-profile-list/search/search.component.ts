@@ -6,8 +6,6 @@ import { ProfileCardComponent } from '../../ui';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
 import { ResizeService } from '@tt/shared';
 
-
-
 @Component({
   selector: 'app-search',
   standalone: true,

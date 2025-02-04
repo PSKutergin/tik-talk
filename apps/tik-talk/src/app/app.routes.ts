@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 import { canActivateAuth, LoginComponent } from '@tt/auth';
 import {
   ProfileComponent,
@@ -10,7 +11,8 @@ import {
 } from '@tt/profile';
 import { chatsRoutes } from '@tt/chats';
 import { LayoutComponent } from '@tt/layout';
-import { provideEffects } from '@ngrx/effects';
+import { postsFeature, PostEffects } from '@tt/posts';
+
 
 export const routes: Routes = [
   {
@@ -18,7 +20,14 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
-      { path: 'profile/:id', component: ProfileComponent },
+      {
+        path: 'profile/:id',
+        component: ProfileComponent,
+        providers: [
+          provideState(postsFeature),
+          provideEffects(PostEffects)
+        ]
+      },
       { path: 'settings', component: SettingsComponent },
       { path: 'chats', loadChildren: () => chatsRoutes },
       {
