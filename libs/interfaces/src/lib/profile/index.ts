@@ -1,5 +1,3 @@
-import { Profile } from "./profile.interface";
+import { Profile } from './profile.interface';
 
-export {
-    Profile
-}
+export { Profile };

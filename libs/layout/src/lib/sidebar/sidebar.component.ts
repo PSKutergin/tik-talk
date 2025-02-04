@@ -43,7 +43,7 @@ export class SidebarComponent {
     }
   ];
 
-  constructor(private profileService: ProfileService) { }
+  constructor(private profileService: ProfileService) {}
 
   ngOnInit() {
     firstValueFrom(this.profileService.getMe());

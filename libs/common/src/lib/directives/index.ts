@@ -1,5 +1,3 @@
-import { DndDirective } from "./dnd.directive";
+import { DndDirective } from './dnd.directive';
 
-export {
-    DndDirective
-}
+export { DndDirective };

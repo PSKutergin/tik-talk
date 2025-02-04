@@ -20,7 +20,7 @@ export class ChatService {
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getMyChats(): Observable<LastMessageResponse[]> {
     return this.http.get<LastMessageResponse[]>(

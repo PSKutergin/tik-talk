@@ -6,7 +6,6 @@ import { ChatService } from '../../data';
 import { ChatWorkspaceHeaderComponent } from './chat-workspace-header/chat-workspace-header.component';
 import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-wrapper/chat-workspace-message-wrapper.component';
 
-
 @Component({
   selector: 'app-chat-workspace',
   standalone: true,
@@ -23,7 +22,7 @@ export class ChatWorkspaceComponent {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private chatService: ChatService
-  ) { }
+  ) {}
 
   activeChat$ = this.activatedRoute.params.pipe(
     switchMap(({ id }) => {
@@ -33,12 +32,12 @@ export class ChatWorkspaceComponent {
           switchMap(({ userId }) => {
             return this.chatService.createdChat(userId).pipe(
               switchMap((res) => {
-                this.router.navigate(['/chats', res.id])
+                this.router.navigate(['/chats', res.id]);
                 return of(null);
               })
-            )
+            );
           })
-        )
+        );
       }
       return this.chatService.getChatById(Number(id));
     })

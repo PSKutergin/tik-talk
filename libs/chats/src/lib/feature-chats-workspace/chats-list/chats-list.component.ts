@@ -22,7 +22,7 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 export class ChatsListComponent {
   filterFormControl = new FormControl('');
 
-  constructor(private chatService: ChatService) { }
+  constructor(private chatService: ChatService) {}
 
   chats$ = this.chatService.getMyChats().pipe(
     switchMap((chats) => {
@@ -31,10 +31,10 @@ export class ChatsListComponent {
         map((value) =>
           value
             ? chats.filter((chat) =>
-              `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-                .toLowerCase()
-                .includes(value.toLowerCase() || '')
-            )
+                `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
+                  .toLowerCase()
+                  .includes(value.toLowerCase() || '')
+              )
             : chats
         )
       );

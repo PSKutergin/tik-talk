@@ -9,7 +9,6 @@ import {
 import { AvatarCircleComponent, SvgIconComponent } from '@tt/common';
 import { ProfileService } from '@tt/profile';
 
-
 @Component({
   selector: 'app-message-input',
   standalone: true,

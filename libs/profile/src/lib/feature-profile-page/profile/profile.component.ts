@@ -27,7 +27,7 @@ export class ProfileComponent {
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
   me$ = toObservable(this.profileService.me);

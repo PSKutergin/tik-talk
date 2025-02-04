@@ -1,4 +1,4 @@
-import { environment } from '../../../../shared/src/lib/environments/environment';
+import { environment } from '@tt/shared';
 import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';

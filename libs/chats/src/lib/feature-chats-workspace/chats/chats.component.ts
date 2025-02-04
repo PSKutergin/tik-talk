@@ -9,4 +9,4 @@ import { ChatsListComponent } from '../chats-list/chats-list.component';
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.scss'
 })
-export class ChatsComponent { }
+export class ChatsComponent {}

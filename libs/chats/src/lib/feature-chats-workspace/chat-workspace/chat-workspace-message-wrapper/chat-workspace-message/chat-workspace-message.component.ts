@@ -1,9 +1,4 @@
-import {
-  Component,
-  HostBinding,
-  input,
-  InputSignal
-} from '@angular/core';
+import { Component, HostBinding, input, InputSignal } from '@angular/core';
 import { AvatarCircleComponent } from '@tt/common';
 import { Message } from '../../../../data';
 

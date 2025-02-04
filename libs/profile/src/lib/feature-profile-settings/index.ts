@@ -1,5 +1,3 @@
-import { SettingsComponent } from "./settings/settings.component";
+import { SettingsComponent } from './settings/settings.component';
 
-export {
-    SettingsComponent
-}
+export { SettingsComponent };

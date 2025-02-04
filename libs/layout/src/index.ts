@@ -1,5 +1,3 @@
-import { LayoutComponent } from "./lib/layout/layout.component";
+import { LayoutComponent } from './lib/layout/layout.component';
 
-export {
-    LayoutComponent
-}
+export { LayoutComponent };

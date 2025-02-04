@@ -10,20 +10,19 @@ import { Profile } from '@tt/interfaces/profile';
 })
 export class ProfileService {
   me = signal<Profile | null>(null);
-  filteredProfiles = signal<Profile[]>([]);
 
   constructor(
     private http: HttpClient,
     private globalStoreService: GlobalStoreService
-  ) { }
+  ) {}
 
   getMe(): Observable<Profile> {
-    return this.http
-      .get<Profile>(environment.api + 'account/me')
-      .pipe(tap((data: Profile) => {
+    return this.http.get<Profile>(environment.api + 'account/me').pipe(
+      tap((data: Profile) => {
         this.me.set(data);
         this.globalStoreService.me.set(data);
-      }));
+      })
+    );
   }
 
   getTestProfiles(): Observable<Profile[]> {
@@ -56,8 +55,9 @@ export class ProfileService {
   }
 
   filterProfiles(params: Record<string, any>): Observable<Pageble<Profile>> {
-    return this.http
-      .get<Pageble<Profile>>(environment.api + 'account/accounts', { params })
-      .pipe(tap((res) => this.filteredProfiles.set(res.items)));
+    return this.http.get<Pageble<Profile>>(
+      environment.api + 'account/accounts',
+      { params }
+    );
   }
 }

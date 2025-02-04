@@ -15,7 +15,7 @@ import { map, Observable, switchMap, tap } from 'rxjs';
 export class PostService {
   posts: WritableSignal<Post[]> = signal<Post[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getPosts(): Observable<Post[]> {
     return this.http
