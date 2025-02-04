@@ -22,15 +22,13 @@ import { ResizeService } from '@tt/shared';
   styleUrl: './post-feed.component.scss'
 })
 export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
+  private resizeService = inject(ResizeService);
+  private postService = inject(PostService);
+
   store = inject(Store);
   hostElement = inject(ElementRef);
   feed = this.store.selectSignal(selectPosts);
   private resizeSubscription: Subscription = Subscription.EMPTY;
-
-  constructor(
-    private resizeService: ResizeService,
-    private postService: PostService
-  ) { }
 
   ngOnInit(): void {
     this.store.dispatch(postActions.fetchPosts({}));

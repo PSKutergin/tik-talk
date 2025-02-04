@@ -1,4 +1,4 @@
-import { Component, WritableSignal } from '@angular/core';
+import { Component, inject, WritableSignal, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
@@ -21,7 +21,8 @@ import { Profile } from '@tt/interfaces/profile';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  private profileService = inject(ProfileService);
   subscribers$ = this.profileService.getSubscribersShortList();
   me: WritableSignal<Profile | null> = this.profileService.me;
 
@@ -42,8 +43,6 @@ export class SidebarComponent {
       link: 'search'
     }
   ];
-
-  constructor(private profileService: ProfileService) {}
 
   ngOnInit() {
     firstValueFrom(this.profileService.getMe());

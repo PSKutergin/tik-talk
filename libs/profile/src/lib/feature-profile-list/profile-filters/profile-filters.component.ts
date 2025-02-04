@@ -13,14 +13,16 @@ import { profileActions } from '../../data';
   styleUrl: './profile-filters.component.scss'
 })
 export class ProfileFiltersComponent {
-  store = inject(Store);
+  private fb = inject(FormBuilder);
+  private store = inject(Store);
+
   searchForm = this.fb.group({
     firstName: [''],
     lastName: [''],
     stack: ['']
   });
 
-  constructor(private fb: FormBuilder) {
+  constructor() {
     this.searchForm.valueChanges
       .pipe(startWith({}), debounceTime(500), takeUntilDestroyed())
       .subscribe((value) =>

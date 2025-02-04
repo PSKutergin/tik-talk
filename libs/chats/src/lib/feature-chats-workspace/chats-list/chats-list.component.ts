@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -20,9 +20,8 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
   styleUrl: './chats-list.component.scss'
 })
 export class ChatsListComponent {
+  private chatService = inject(ChatService);
   filterFormControl = new FormControl('');
-
-  constructor(private chatService: ChatService) {}
 
   chats$ = this.chatService.getMyChats().pipe(
     switchMap((chats) => {
@@ -31,10 +30,10 @@ export class ChatsListComponent {
         map((value) =>
           value
             ? chats.filter((chat) =>
-                `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-                  .toLowerCase()
-                  .includes(value.toLowerCase() || '')
-              )
+              `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
+                .toLowerCase()
+                .includes(value.toLowerCase() || '')
+            )
             : chats
         )
       );

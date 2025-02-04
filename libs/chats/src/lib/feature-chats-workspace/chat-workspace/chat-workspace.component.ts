@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, of, switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
@@ -18,11 +18,9 @@ import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-w
   styleUrl: './chat-workspace.component.scss'
 })
 export class ChatWorkspaceComponent {
-  constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private chatService: ChatService
-  ) {}
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private chatService = inject(ChatService);
 
   activeChat$ = this.activatedRoute.params.pipe(
     switchMap(({ id }) => {

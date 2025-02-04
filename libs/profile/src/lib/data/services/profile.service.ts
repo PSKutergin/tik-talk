@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { environment, GlobalStoreService } from '@tt/shared';
 import { Pageble } from '@tt/shared';
@@ -9,12 +9,10 @@ import { Profile } from '@tt/interfaces/profile';
   providedIn: 'root'
 })
 export class ProfileService {
-  me = signal<Profile | null>(null);
+  private http = inject(HttpClient);
+  private globalStoreService = inject(GlobalStoreService);
 
-  constructor(
-    private http: HttpClient,
-    private globalStoreService: GlobalStoreService
-  ) {}
+  me = signal<Profile | null>(null);
 
   getMe(): Observable<Profile> {
     return this.http.get<Profile>(environment.api + 'account/me').pipe(

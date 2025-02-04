@@ -1,7 +1,7 @@
 import { environment } from '@tt/shared';
 import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, tap, throwError } from 'rxjs';
@@ -10,14 +10,12 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private cookiesService = inject(CookieService);
+
   token: string | null = null;
   refreshToken: string | null = null;
-
-  constructor(
-    private http: HttpClient,
-    private cookiesService: CookieService,
-    private router: Router
-  ) {}
 
   get isAuth(): boolean {
     if (!this.token) {

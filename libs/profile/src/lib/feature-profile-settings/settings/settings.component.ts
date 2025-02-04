@@ -1,4 +1,4 @@
-import { Component, effect, ViewChild } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -26,6 +26,10 @@ import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
 export class SettingsComponent {
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
+  private fb = inject(FormBuilder);
+  private profileService = inject(ProfileService)
+  private authService = inject(AuthService)
+
   profile$ = toObservable(this.profileService.me);
 
   profileForm = this.fb.group({
@@ -36,14 +40,8 @@ export class SettingsComponent {
     stack: ['']
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private profileService: ProfileService,
-    private authService: AuthService
-  ) {
+  constructor() {
     effect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
       this.profileForm.patchValue({
         ...this.profileService.me(),
         stack: this.mergeStack(this.profileService.me()?.stack)

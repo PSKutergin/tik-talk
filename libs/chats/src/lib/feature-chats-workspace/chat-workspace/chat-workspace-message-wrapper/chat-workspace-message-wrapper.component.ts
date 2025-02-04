@@ -25,16 +25,14 @@ import { ResizeService } from '@tt/shared';
 })
 export class ChatWorkspaceMessageWrapperComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  private resizeService = inject(ResizeService);
+  private chatService = inject(ChatService);
+
   hostElement = inject(ElementRef);
   chat: InputSignal<Chat> = input.required<Chat>();
   private resizeSubscription: Subscription = Subscription.EMPTY;
 
   @ViewChild('messageWrapper') messageWrapper!: ElementRef;
-
-  constructor(
-    private resizeService: ResizeService,
-    private chatService: ChatService
-  ) { }
 
   messagesGroups = this.chatService.activeChatMessages;
 

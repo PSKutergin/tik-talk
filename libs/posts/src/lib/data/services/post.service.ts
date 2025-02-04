@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '@tt/shared';
 import {
   Comment,
@@ -13,14 +13,11 @@ import { map, Observable, switchMap, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class PostService {
-  // posts: WritableSignal<Post[]> = signal<Post[]>([]);
-
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
   getPosts(): Observable<Post[]> {
     return this.http
       .get<Post[]>(environment.api + 'post/')
-    // .pipe(tap((data: Post[]) => this.posts.set(data)));
   }
 
   createPost(data: PostCreateDto): Observable<Post[]> {

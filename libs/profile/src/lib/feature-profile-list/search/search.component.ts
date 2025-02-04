@@ -14,14 +14,11 @@ import { ResizeService } from '@tt/shared';
   styleUrl: './search.component.scss'
 })
 export class SearchComponent implements AfterViewInit, OnDestroy {
-  store = inject(Store);
+  private resizeService = inject(ResizeService);
+  private store = inject(Store);
   hostElement = inject(ElementRef);
   profiles = this.store.selectSignal(selectFilteredProfiles);
   private resizeSubscription: Subscription = Subscription.EMPTY;
-
-  constructor(
-    private resizeService: ResizeService,
-  ) { }
 
   ngAfterViewInit(): void {
     this.resizeService.resizeElement(this.hostElement);

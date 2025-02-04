@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs';
@@ -23,11 +23,9 @@ import { ProfileHeaderComponent } from '../../ui';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent {
-  constructor(
-    private profileService: ProfileService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router
-  ) {}
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute)
+  private profileService = inject(ProfileService)
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
   me$ = toObservable(this.profileService.me);

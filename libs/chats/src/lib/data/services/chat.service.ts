@@ -15,12 +15,12 @@ import { Profile } from '@tt/interfaces/profile';
   providedIn: 'root'
 })
 export class ChatService {
+  private http = inject(HttpClient);
+
   chatsUrl = `${environment.api}chat/`;
   messagesUrl = `${environment.api}message/`;
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
-
-  constructor(private http: HttpClient) {}
 
   getMyChats(): Observable<LastMessageResponse[]> {
     return this.http.get<LastMessageResponse[]>(
