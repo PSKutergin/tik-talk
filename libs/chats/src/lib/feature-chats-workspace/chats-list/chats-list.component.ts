@@ -30,10 +30,10 @@ export class ChatsListComponent {
         map((value) =>
           value
             ? chats.filter((chat) =>
-              `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-                .toLowerCase()
-                .includes(value.toLowerCase() || '')
-            )
+                `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
+                  .toLowerCase()
+                  .includes(value.toLowerCase() || '')
+              )
             : chats
         )
       );

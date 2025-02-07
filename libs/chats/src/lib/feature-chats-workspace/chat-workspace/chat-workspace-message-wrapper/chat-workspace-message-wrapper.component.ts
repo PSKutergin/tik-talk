@@ -24,7 +24,8 @@ import { ResizeService } from '@tt/shared';
   styleUrl: './chat-workspace-message-wrapper.component.scss'
 })
 export class ChatWorkspaceMessageWrapperComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+{
   private resizeService = inject(ResizeService);
   private chatService = inject(ChatService);
 
@@ -42,11 +43,9 @@ export class ChatWorkspaceMessageWrapperComponent
 
   ngAfterViewInit(): void {
     this.resizeService.resizeElement(this.hostElement);
-    this.resizeSubscription = this.resizeService
-      .onResize(100)
-      .subscribe(() => {
-        this.resizeService.resizeElement(this.hostElement);
-      });
+    this.resizeSubscription = this.resizeService.onResize(100).subscribe(() => {
+      this.resizeService.resizeElement(this.hostElement);
+    });
   }
 
   ngAfterViewChecked() {

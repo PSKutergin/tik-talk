@@ -4,15 +4,14 @@ import {
   ElementRef,
   inject,
   OnDestroy,
-  OnInit,
+  OnInit
 } from '@angular/core';
-import { firstValueFrom, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { PostInputComponent } from '../../ui';
-import { postActions, PostService, selectPosts } from '../../data';
+import { postActions, selectPosts } from '../../data';
 import { PostComponent } from '../post/post.component';
 import { ResizeService } from '@tt/shared';
-
 
 @Component({
   selector: 'app-post-feed',
@@ -23,12 +22,10 @@ import { ResizeService } from '@tt/shared';
 })
 export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeService = inject(ResizeService);
-  private postService = inject(PostService);
-
-  store = inject(Store);
-  hostElement = inject(ElementRef);
-  feed = this.store.selectSignal(selectPosts);
+  private store = inject(Store);
+  private hostElement = inject(ElementRef);
   private resizeSubscription: Subscription = Subscription.EMPTY;
+  feed = this.store.selectSignal(selectPosts);
 
   ngOnInit(): void {
     this.store.dispatch(postActions.fetchPosts({}));
@@ -36,11 +33,9 @@ export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.resizeService.resizeElement(this.hostElement);
-    this.resizeSubscription = this.resizeService
-      .onResize(100)
-      .subscribe(() => {
-        this.resizeService.resizeElement(this.hostElement);
-      });
+    this.resizeSubscription = this.resizeService.onResize(100).subscribe(() => {
+      this.resizeService.resizeElement(this.hostElement);
+    });
   }
 
   ngOnDestroy(): void {
@@ -50,11 +45,13 @@ export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onCreatedPost(data: Record<string, any>) {
-    firstValueFrom(
-      this.postService.createPost({
-        title: 'New post',
-        content: data['text'],
-        authorId: data['authorId']
+    this.store.dispatch(
+      postActions.postCreated({
+        post: {
+          title: 'New post',
+          content: data['text'],
+          authorId: data['authorId']
+        }
       })
     );
   }

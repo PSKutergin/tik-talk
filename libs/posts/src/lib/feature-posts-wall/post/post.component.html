@@ -18,7 +18,7 @@
     <section class="post-counters">
       <section class="amount comments">
         <svg icon="comment" class="svg16"></svg>
-        <span class="count">{{ comments().length }}</span>
+        <span class="count">{{ renderComments()?.length ?? 0 }}</span>
       </section>
 
       <section class="amount likes">
@@ -28,7 +28,7 @@
     </section>
 
     <section class="post__comments-wrapper">
-      @for (comment of comments(); track comment.id) {
+      @for (comment of renderComments(); track comment.id) {
         <app-comment [comment]="comment"></app-comment>
       }
     </section>

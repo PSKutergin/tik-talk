@@ -24,8 +24,8 @@ import { ProfileHeaderComponent } from '../../ui';
 })
 export class ProfileComponent {
   private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute)
-  private profileService = inject(ProfileService)
+  private activatedRoute = inject(ActivatedRoute);
+  private profileService = inject(ProfileService);
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
   me$ = toObservable(this.profileService.me);

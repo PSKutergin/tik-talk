@@ -27,8 +27,8 @@ export class SettingsComponent {
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
   private fb = inject(FormBuilder);
-  private profileService = inject(ProfileService)
-  private authService = inject(AuthService)
+  private profileService = inject(ProfileService);
+  private authService = inject(AuthService);
 
   profile$ = toObservable(this.profileService.me);
 

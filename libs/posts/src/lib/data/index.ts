@@ -1,5 +1,10 @@
-import { Post, Comment } from './interfaces/post.interface';
+import {
+  Post,
+  Comment,
+  PostCreateDto,
+  CommentCreateDto
+} from './interfaces/post.interface';
 import { PostService } from './services/post.service';
 
-export { Post, Comment, PostService };
+export { Post, PostCreateDto, Comment, CommentCreateDto, PostService };
 export * from './store';

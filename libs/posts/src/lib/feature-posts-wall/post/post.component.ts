@@ -1,12 +1,20 @@
-import { firstValueFrom } from 'rxjs';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  Signal,
+  signal
+} from '@angular/core';
 import {
   AvatarCircleComponent,
   SvgIconComponent,
   TimeFormatPipe
 } from '@tt/common';
 import { CommentComponent, PostInputComponent } from '../../ui';
-import { Comment, Post, PostService } from '../../data';
+import { Comment, Post, postActions, selectCommentsByPost } from '../../data';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post',
@@ -22,35 +30,49 @@ import { Comment, Post, PostService } from '../../data';
   styleUrl: './post.component.scss'
 })
 export class PostComponent implements OnInit {
-  private postService = inject(PostService);
-
+  private store = inject(Store);
   post = input<Post>();
-  comments = signal<Comment[]>([]);
+  postId = 0;
+  comments!: Signal<Comment[]>;
+
+  renderComments = computed(() => {
+    if (this.comments().length) {
+      return this.sortComments([...this.comments()]);
+    }
+
+    const postComments = this.post()?.comments;
+    return postComments && this.sortComments([...postComments]);
+  });
 
   ngOnInit() {
-    this.comments.set(
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      this.post()!.comments.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-    );
+    const post = this.post();
+
+    if (post) {
+      this.postId = post?.id;
+
+      this.comments = this.store.selectSignal(
+        selectCommentsByPost(this.postId)
+      );
+      this.store.dispatch(postActions.fetchComments({ postId: this.postId }));
+    }
   }
 
   onCreatedComment(data: Record<string, any>) {
-    firstValueFrom(
-      this.postService.createComment({
-        text: data['text'],
-        authorId: data['authorId'],
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        postId: this.post()!.id
+    this.store.dispatch(
+      postActions.commentCreated({
+        comment: {
+          text: data['text'],
+          authorId: data['authorId'],
+          postId: this.postId
+        }
       })
-    ).then(async () => {
-      const comments = await firstValueFrom(
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.postService.getCommentsByPostId(this.post()!.id)
-      );
-      this.comments.set(comments);
-    });
+    );
+  }
+
+  sortComments(comments: Comment[]) {
+    return comments.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   }
 }

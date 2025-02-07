@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ElementRef, inject, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  OnDestroy
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { selectFilteredProfiles } from '../../data';
@@ -22,11 +28,9 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.resizeService.resizeElement(this.hostElement);
-    this.resizeSubscription = this.resizeService
-      .onResize(100)
-      .subscribe(() => {
-        this.resizeService.resizeElement(this.hostElement);
-      });
+    this.resizeSubscription = this.resizeService.onResize(100).subscribe(() => {
+      this.resizeService.resizeElement(this.hostElement);
+    });
   }
 
   ngOnDestroy(): void {

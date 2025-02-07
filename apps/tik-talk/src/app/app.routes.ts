@@ -13,7 +13,6 @@ import { chatsRoutes } from '@tt/chats';
 import { LayoutComponent } from '@tt/layout';
 import { postsFeature, PostEffects } from '@tt/posts';
 
-
 export const routes: Routes = [
   {
     path: '',
@@ -23,10 +22,7 @@ export const routes: Routes = [
       {
         path: 'profile/:id',
         component: ProfileComponent,
-        providers: [
-          provideState(postsFeature),
-          provideEffects(PostEffects)
-        ]
+        providers: [provideState(postsFeature), provideEffects(PostEffects)]
       },
       { path: 'settings', component: SettingsComponent },
       { path: 'chats', loadChildren: () => chatsRoutes },

@@ -7,7 +7,7 @@ import {
   Post,
   PostCreateDto
 } from '../interfaces/post.interface';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +16,11 @@ export class PostService {
   private http = inject(HttpClient);
 
   getPosts(): Observable<Post[]> {
-    return this.http
-      .get<Post[]>(environment.api + 'post/')
+    return this.http.get<Post[]>(environment.api + 'post/');
   }
 
   createPost(data: PostCreateDto): Observable<Post[]> {
-    return this.http
-      .post<Post[]>(environment.api + 'post/', data)
-      .pipe(switchMap(() => this.getPosts()));
+    return this.http.post<Post[]>(environment.api + 'post/', data);
   }
 
   getCommentsByPostId(postId: number): Observable<Comment[]> {
