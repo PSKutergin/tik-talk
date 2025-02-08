@@ -66,9 +66,7 @@ export class ChatWorkspaceMessageWrapperComponent
   }
 
   async onMessageCreated(messageText: string) {
-    await firstValueFrom(
-      this.chatService.sendMessage(this.chat().id, messageText)
-    );
+    this.chatService.wsAdapter.sendMessage(this.chat().id, messageText);
 
     await firstValueFrom(this.chatService.getChatById(this.chat().id));
 

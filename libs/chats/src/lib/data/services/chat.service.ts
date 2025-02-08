@@ -1,8 +1,10 @@
+import _ from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { DateTime } from 'luxon';
 import { environment } from '@tt/shared';
+import { AuthService } from '@tt/auth';
 import { ProfileService } from '@tt/profile';
 import {
   Chat,
@@ -10,17 +12,54 @@ import {
   Message
 } from '../interfaces/chat.interface';
 import { Profile } from '@tt/interfaces/profile';
+import { ChatWsService } from '../interfaces/chat-ws-service.interface';
+import { ChatWsNativeService } from './chat-ws-native.service';
+import { ChatWsMessage } from '../interfaces/chat-ws-message.interface';
+import { isNewMessage } from '../interfaces/types-guard';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   chatsUrl = `${environment.api}chat/`;
   messagesUrl = `${environment.api}message/`;
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
+
+  wsAdapter: ChatWsService = new ChatWsNativeService();
+
+  connectWs(): void {
+    this.wsAdapter.connect({
+      url: `${this.chatsUrl}ws`,
+      token: this.authService.token ?? '',
+      handleMessage: this.handleWSMessage
+    });
+  }
+
+  handleWSMessage = (message: ChatWsMessage): void => {
+    if (!('message' in message)) return;
+
+    if (isNewMessage(message)) {
+      this.activeChatMessages.update((mgs) => {
+        const newMessage = {
+          id: message.data.id,
+          userFromId: message.data.author,
+          personalChatId: message.data.chat_id,
+          text: message.data.message,
+          createdAt: message.data.created_at,
+          isRead: false,
+          isMine: false
+        };
+        const oldMessages = mgs.flatMap((d) => d.messages);
+        const newMessages = [...oldMessages, newMessage];
+
+        return this.groupMessagesByDate(newMessages as Message[]);
+      });
+    }
+  };
 
   getMyChats(): Observable<LastMessageResponse[]> {
     return this.http.get<LastMessageResponse[]>(
@@ -40,7 +79,7 @@ export class ChatService {
           isMine: message.userFromId === this.me()!.id
         }));
 
-        this.groupMessagesByDate(patchedMessages);
+        this.activeChatMessages.set(this.groupMessagesByDate(patchedMessages));
 
         return {
           ...chat,
@@ -66,44 +105,42 @@ export class ChatService {
     );
   }
 
-  groupMessagesByDate(messages: Message[]) {
-    const groupedMessages: { date: string; messages: Message[] }[] = [];
+  groupMessagesByDate(
+    messages: Message[]
+  ): { date: string; messages: Message[] }[] {
     const today = DateTime.local().startOf('day').toFormat('dd.MM.yyyy');
     const yesterday = DateTime.local()
       .minus({ days: 1 })
       .startOf('day')
       .toFormat('dd.MM.yyyy');
 
-    messages.forEach((message) => {
-      let date = DateTime.fromISO(message.createdAt, { zone: 'utc' })
+    // Преобразуем createdAt для каждого сообщения
+    const formattedMessages = messages.map((message) => ({
+      ...message,
+      createdAt: DateTime.fromISO(message.createdAt, { zone: 'utc' })
         .setZone(DateTime.local().zone)
+        .toFormat('HH:mm')
+    }));
+
+    // Группируем сообщения по дате
+    const groupedMessages = _.groupBy(formattedMessages, (message) => {
+      const messageDate = DateTime.fromISO(message.createdAt)
         .startOf('day')
         .toFormat('dd.MM.yyyy');
 
-      message.createdAt = DateTime.fromISO(message.createdAt, { zone: 'utc' })
-        .setZone(DateTime.local().zone)
-        .toFormat('HH:mm');
-
-      // Проверяем, если это сегодня или вчера, заменяем дату
-      if (date === today) {
-        date = 'Сегодня';
-      } else if (date === yesterday) {
-        date = 'Вчера';
+      // Сравниваем дату сообщения с today и yesterday
+      if (messageDate === today) {
+        return 'Сегодня';
+      } else if (messageDate === yesterday) {
+        return 'Вчера';
+      } else {
+        return messageDate;
       }
-
-      // Ищем, существует ли уже группа для этой даты
-      let group = groupedMessages.find((group) => group.date === date);
-
-      if (!group) {
-        // Если группы с такой датой нет, создаем новую
-        group = { date, messages: [] };
-        groupedMessages.push(group);
-      }
-
-      // Добавляем сообщение в группу
-      group.messages.push(message);
     });
 
-    this.activeChatMessages.set(groupedMessages);
+    return Object.entries(groupedMessages).map(([date, messages]) => ({
+      date,
+      messages
+    }));
   }
 }
