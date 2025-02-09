@@ -32,4 +32,5 @@ export interface ChatWsSendMessage {
 export type ChatWsMessage =
   | ChatWsUnreadMessage
   | ChatWsNewMessage
-  | ChatWsError;
+  | ChatWsError
+  | ChatWsSendMessage;

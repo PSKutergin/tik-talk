@@ -16,6 +16,7 @@ import { ChatWsService } from '../interfaces/chat-ws-service.interface';
 import { ChatWsNativeService } from './chat-ws-native.service';
 import { ChatWsMessage } from '../interfaces/chat-ws-message.interface';
 import { isNewMessage } from '../interfaces/types-guard';
+import { ChatWsRxjsService } from './chat-ws-rxjs.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,14 +30,14 @@ export class ChatService {
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
-  wsAdapter: ChatWsService = new ChatWsNativeService();
+  wsAdapter: ChatWsService = new ChatWsRxjsService();
 
-  connectWs(): void {
-    this.wsAdapter.connect({
+  connectWs(): Observable<ChatWsMessage> {
+    return this.wsAdapter.connect({
       url: `${this.chatsUrl}ws`,
       token: this.authService.token ?? '',
       handleMessage: this.handleWSMessage
-    });
+    }) as Observable<ChatWsMessage>;
   }
 
   handleWSMessage = (message: ChatWsMessage): void => {
