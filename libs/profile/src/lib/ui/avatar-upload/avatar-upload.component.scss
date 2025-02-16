@@ -1,0 +1,36 @@
+:host {
+  display: grid;
+  grid-template-columns: 7.75rem 1fr;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem solid var(--white);
+}
+
+.avatar {
+  width: 7.75rem;
+  height: 7.75rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.dropzone {
+  border-radius: 0.125rem;
+  border: 0.1rem dashed var(--white);
+  padding: 1rem;
+  transition: all 0.3s ease;
+
+  &.fileover {
+    border-color: var(--primary);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__input {
+    display: none;
+  }
+}

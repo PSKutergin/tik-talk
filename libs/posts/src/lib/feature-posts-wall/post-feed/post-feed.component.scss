@@ -1,0 +1,11 @@
+:host {
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: min-content 1fr;
+}
+
+.post__wrapper {
+  display: grid;
+  gap: 1rem;
+  overflow-y: scroll;
+}

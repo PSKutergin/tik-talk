@@ -1,0 +1,6 @@
+@if (activeChat(); as chat) {
+  <app-chat-workspace-header
+    [profile]="chat.companion"></app-chat-workspace-header>
+  <app-chat-workspace-message-wrapper
+    [chat]="chat"></app-chat-workspace-message-wrapper>
+}

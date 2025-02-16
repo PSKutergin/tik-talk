@@ -1,0 +1,10 @@
+:host {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.profile-card__wrapper {
+  display: grid;
+  gap: 0.5rem;
+  overflow-y: scroll;
+}

@@ -1,0 +1,15 @@
+:host {
+  border-right: 0.1rem solid var(--white);
+  display: block;
+  overflow: hidden;
+}
+
+.chats-list {
+  height: calc(100% - 4rem);
+  overflow-y: scroll;
+}
+
+.chats-filter-input__wrapper {
+  padding: 1rem 1.25rem;
+  border-bottom: 0.1rem solid var(--white);
+}

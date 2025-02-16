@@ -1,0 +1,19 @@
+<section class="chats-filter-input__wrapper">
+  <label class="form-label">
+    <input
+      class="form-input"
+      type="text"
+      placeholder="Поиск..."
+      [formControl]="filterFormControl" />
+  </label>
+</section>
+
+<section class="chats-list">
+  @for (chat of chats(); track chat.id) {
+    <button
+      chats
+      [chat]="chat"
+      [routerLink]="[chat.id]"
+      routerLinkActive="active"></button>
+  }
+</section>
