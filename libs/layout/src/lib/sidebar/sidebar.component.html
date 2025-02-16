@@ -10,6 +10,10 @@
           routerLinkActive="active">
           <svg class="svg16 menu-item-icon" icon="{{ item.icon }}"></svg>
           <span>{{ item.label }}</span>
+
+          @if (item.label === 'Чаты' && unreadMessages()) {
+            <span class="count-chats">{{ unreadMessages() }}</span>
+          }
         </a>
       </li>
     }

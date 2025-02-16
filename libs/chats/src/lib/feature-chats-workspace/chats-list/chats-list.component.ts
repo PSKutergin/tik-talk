@@ -9,7 +9,11 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { chatActions, selectAuthorFilter, selectFilteredChats } from '../../data';
+import {
+  chatActions,
+  selectAuthorFilter,
+  selectFilteredChats
+} from '../../data';
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { ResizeService } from '@tt/shared';
 import { Store } from '@ngrx/store';

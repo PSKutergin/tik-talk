@@ -14,7 +14,7 @@ import {
 import { Profile } from '@tt/interfaces/profile';
 import { ChatWsService } from '../interfaces/chat-ws-service.interface';
 import { ChatWsMessage } from '../interfaces/chat-ws-message.interface';
-import { isNewMessage } from '../interfaces/types-guard';
+import { isNewMessage, isUnreadMessage } from '../interfaces/types-guard';
 import { ChatWsRxjsService } from './chat-ws-rxjs.service';
 import { Store } from '@ngrx/store';
 import { chatActions } from '..';
@@ -30,6 +30,7 @@ export class ChatService {
   chatsUrl = `${environment.api}chat/`;
   messagesUrl = `${environment.api}message/`;
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
+  unreadMessages = signal<number>(0);
   activeChatId = signal<number>(0);
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
@@ -66,6 +67,11 @@ export class ChatService {
       } else {
         this.store.dispatch(chatActions.fetchLastChats({}));
       }
+    }
+
+    if (isUnreadMessage(message)) {
+      console.log('Unread message', message);
+      this.unreadMessages.set(message.data.count);
     }
   };
 

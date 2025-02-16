@@ -55,16 +55,5 @@
       text-overflow: ellipsis; /* Добавляем многоточие */
       white-space: break-spaces; /* Текст будет переноситься на новые строки */
     }
-
-    .count {
-      background: var(--primary);
-      border-radius: 50%;
-      width: 1.5rem;
-      height: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-    }
   }
 }

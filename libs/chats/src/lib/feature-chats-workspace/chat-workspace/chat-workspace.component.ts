@@ -16,9 +16,7 @@ import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-w
 })
 export class ChatWorkspaceComponent {
   private store = inject(Store);
-  // private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
-  // private chatService = inject(ChatService);
 
   activeChat = this.store.selectSignal(selectActiveChat);
 
