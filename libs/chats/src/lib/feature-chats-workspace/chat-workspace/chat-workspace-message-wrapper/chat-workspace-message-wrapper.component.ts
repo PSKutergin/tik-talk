@@ -10,11 +10,12 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { firstValueFrom, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../ui';
-import { Chat, ChatService } from '../../../data';
+import { Chat, chatActions, ChatService } from '../../../data';
 import { ResizeService } from '@tt/shared';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chat-workspace-message-wrapper',
@@ -26,6 +27,7 @@ import { ResizeService } from '@tt/shared';
 export class ChatWorkspaceMessageWrapperComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
 {
+  private store = inject(Store);
   private resizeService = inject(ResizeService);
   private chatService = inject(ChatService);
 
@@ -65,10 +67,12 @@ export class ChatWorkspaceMessageWrapperComponent
     }
   }
 
-  async onMessageCreated(messageText: string) {
+  onMessageCreated(messageText: string) {
     this.chatService.wsAdapter.sendMessage(this.chat().id, messageText);
 
-    await firstValueFrom(this.chatService.getChatById(this.chat().id));
+    this.store.dispatch(
+      chatActions.fetchActiveChat({ chatId: this.chat().id })
+    );
 
     this.scrollMessages();
   }

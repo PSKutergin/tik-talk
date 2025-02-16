@@ -18,6 +18,7 @@ export interface Message {
   isRead: boolean;
   user?: Profile;
   isMine?: boolean;
+  createdAtTime?: string;
 }
 
 export interface LastMessageResponse {

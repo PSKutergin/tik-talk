@@ -9,7 +9,7 @@
 </section>
 
 <section class="chats-list">
-  @for (chat of chats$ | async; track chat.id) {
+  @for (chat of chats(); track chat.id) {
     <button
       chats
       [chat]="chat"

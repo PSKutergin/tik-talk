@@ -6,3 +6,4 @@ import {
 import { ChatService } from './services/chat.service';
 
 export { Chat, Message, LastMessageResponse, ChatService };
+export * from './store';

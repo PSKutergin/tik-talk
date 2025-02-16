@@ -13,21 +13,24 @@ import {
 } from '../interfaces/chat.interface';
 import { Profile } from '@tt/interfaces/profile';
 import { ChatWsService } from '../interfaces/chat-ws-service.interface';
-import { ChatWsNativeService } from './chat-ws-native.service';
 import { ChatWsMessage } from '../interfaces/chat-ws-message.interface';
 import { isNewMessage } from '../interfaces/types-guard';
 import { ChatWsRxjsService } from './chat-ws-rxjs.service';
+import { Store } from '@ngrx/store';
+import { chatActions } from '..';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
+  private store = inject(Store);
   private http = inject(HttpClient);
   private authService = inject(AuthService);
 
   chatsUrl = `${environment.api}chat/`;
   messagesUrl = `${environment.api}message/`;
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
+  activeChatId = signal<number>(0);
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
   wsAdapter: ChatWsService = new ChatWsRxjsService();
@@ -41,24 +44,28 @@ export class ChatService {
   }
 
   handleWSMessage = (message: ChatWsMessage): void => {
-    if (!('message' in message)) return;
+    if (!('action' in message)) return;
 
     if (isNewMessage(message)) {
-      this.activeChatMessages.update((mgs) => {
-        const newMessage = {
-          id: message.data.id,
-          userFromId: message.data.author,
-          personalChatId: message.data.chat_id,
-          text: message.data.message,
-          createdAt: message.data.created_at,
-          isRead: false,
-          isMine: false
-        };
-        const oldMessages = mgs.flatMap((d) => d.messages);
-        const newMessages = [...oldMessages, newMessage];
+      if (this.activeChatId() === message.data.chat_id) {
+        this.activeChatMessages.update((mgs) => {
+          const newMessage = {
+            id: message.data.id,
+            userFromId: message.data.author,
+            personalChatId: message.data.chat_id,
+            text: message.data.message,
+            createdAt: message.data.created_at,
+            isRead: false,
+            isMine: false
+          };
+          const oldMessages = mgs.flatMap((d) => d.messages);
+          const newMessages = [...oldMessages, newMessage];
 
-        return this.groupMessagesByDate(newMessages as Message[]);
-      });
+          return this.groupMessagesByDate(newMessages as Message[]);
+        });
+      } else {
+        this.store.dispatch(chatActions.fetchLastChats({}));
+      }
     }
   };
 
@@ -69,6 +76,8 @@ export class ChatService {
   }
 
   getChatById(id: number): Observable<Chat> {
+    this.activeChatId.set(id);
+
     return this.http.get<Chat>(`${this.chatsUrl}${id}`).pipe(
       map((chat: Chat) => {
         const patchedMessages = chat.messages.map((message) => ({

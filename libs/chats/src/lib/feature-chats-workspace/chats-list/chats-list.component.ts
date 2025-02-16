@@ -3,22 +3,23 @@ import {
   Component,
   ElementRef,
   inject,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { map, startWith, Subscription, switchMap } from 'rxjs';
-import { ChatService } from '../../data';
+import { Subscription } from 'rxjs';
+import { chatActions, selectAuthorFilter, selectFilteredChats } from '../../data';
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
 import { ResizeService } from '@tt/shared';
+import { Store } from '@ngrx/store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chats-list',
   standalone: true,
   imports: [
     ChatsBtnComponent,
-    AsyncPipe,
     RouterLink,
     RouterLinkActive,
     ReactiveFormsModule
@@ -26,30 +27,40 @@ import { ResizeService } from '@tt/shared';
   templateUrl: './chats-list.component.html',
   styleUrl: './chats-list.component.scss'
 })
-export class ChatsListComponent implements AfterViewInit, OnDestroy {
+export class ChatsListComponent implements AfterViewInit, OnDestroy, OnInit {
+  private store = inject(Store);
   private resizeService = inject(ResizeService);
-  private chatService = inject(ChatService);
   private resizeSubscription: Subscription = Subscription.EMPTY;
 
   hostElement = inject(ElementRef);
   filterFormControl = new FormControl('');
 
-  chats$ = this.chatService.getMyChats().pipe(
-    switchMap((chats) => {
-      return this.filterFormControl.valueChanges.pipe(
-        startWith(''),
-        map((value) =>
-          value
-            ? chats.filter((chat) =>
-                `${chat.userFrom.firstName} ${chat.userFrom.lastName}`
-                  .toLowerCase()
-                  .includes(value.toLowerCase() || '')
-              )
-            : chats
-        )
-      );
-    })
-  );
+  // Получаем отфильтрованные чаты из стора
+  chats = this.store.selectSignal(selectFilteredChats);
+
+  // Получаем текущий фильтр из стора через selectSignal
+  authorFilter = this.store.selectSignal(selectAuthorFilter);
+
+  constructor() {
+    // Подписываемся на изменения в поле ввода и фильтруем чаты
+    this.filterFormControl.valueChanges
+      .pipe(takeUntilDestroyed())
+      .subscribe((author) => {
+        // Отправляем экшн для фильтрации чатов по автору
+        this.store.dispatch(
+          chatActions.filterLastChats({ author: author ?? '' })
+        );
+      });
+  }
+
+  ngOnInit(): void {
+    // Запрашиваем последние чаты при инициализации
+    this.store.dispatch(chatActions.fetchLastChats({}));
+
+    // Устанавливаем значение фильтра в форму
+    const authorFilter = this.authorFilter();
+    this.filterFormControl.setValue(authorFilter);
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {

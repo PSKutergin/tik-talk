@@ -4,8 +4,7 @@ import {
   inject,
   input,
   OnInit,
-  Signal,
-  signal
+  Signal
 } from '@angular/core';
 import {
   AvatarCircleComponent,

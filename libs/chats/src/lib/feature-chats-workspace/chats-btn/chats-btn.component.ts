@@ -16,13 +16,15 @@ export class ChatsBtnComponent {
   datePipe: DatePipe = inject(DatePipe);
 
   getFormattedDate(date: string): string | null {
-    const currentDate = new Date();
-    const chatDate = new Date(date);
+    if (!date) return null;
 
-    if (currentDate.getDate() > chatDate.getDate()) {
+    const currentDate = new Date().setHours(0, 0, 0, 0);
+    const chatDate = new Date(date).setHours(0, 0, 0, 0);
+
+    if (currentDate > chatDate) {
       return this.datePipe.transform(chatDate, 'dd.MM.yy');
     } else {
-      return this.datePipe.transform(chatDate, 'HH:mm');
+      return this.datePipe.transform(new Date(date), 'HH:mm');
     }
   }
 }
