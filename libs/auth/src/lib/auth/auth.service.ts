@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.cookiesService.deleteAll();
+    this.cookiesService.deleteAll('/');
     this.token = null;
     this.refreshToken = null;
 
@@ -66,7 +66,7 @@ export class AuthService {
     this.token = data.access_token;
     this.refreshToken = data.refresh_token;
 
-    this.cookiesService.set('token', this.token);
-    this.cookiesService.set('refreshToken', this.refreshToken);
+    this.cookiesService.set('token', this.token, { path: '/' });
+    this.cookiesService.set('refreshToken', this.refreshToken, { path: '/' });
   }
 }

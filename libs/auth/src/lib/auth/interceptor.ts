@@ -16,6 +16,7 @@ import {
 } from 'rxjs';
 import { TokenResponse } from './auth.interface';
 
+// eslint-disable-next-line prefer-const
 let isRefreshing$ = new BehaviorSubject<boolean>(false);
 
 export const authInterceptor: HttpInterceptorFn = (

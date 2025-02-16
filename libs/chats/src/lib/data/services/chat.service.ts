@@ -69,10 +69,7 @@ export class ChatService {
       }
     }
 
-    if (isUnreadMessage(message)) {
-      console.log('Unread message', message);
-      this.unreadMessages.set(message.data.count);
-    }
+    if (isUnreadMessage(message)) this.unreadMessages.set(message.data.count);
   };
 
   getMyChats(): Observable<LastMessageResponse[]> {

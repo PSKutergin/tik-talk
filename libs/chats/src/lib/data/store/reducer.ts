@@ -25,8 +25,19 @@ export const chatsFeature = createFeature({
       };
     }),
     on(chatActions.activeChatLoaded, (state, payload) => {
+      const lastChatsStore = state.lastChats.map((chat) => {
+        if (chat.id === payload.chat.id) {
+          return {
+            ...chat,
+            unreadMessages: 0
+          };
+        }
+        return chat;
+      });
+
       return {
         ...state,
+        lastChats: lastChatsStore,
         activeChat: payload.chat
       };
     }),
