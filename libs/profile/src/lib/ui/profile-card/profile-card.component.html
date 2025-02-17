@@ -1,9 +1,11 @@
 @if (profile) {
   <section class="profile-card">
     <section class="profile-card__avatar">
-      <app-avatar-circle
-        [avatarUrl]="profile.avatarUrl"
-        class="size70"></app-avatar-circle>
+      <a [routerLink]="['/profile', profile.id]">
+        <app-avatar-circle
+          [avatarUrl]="profile.avatarUrl"
+          class="size70"></app-avatar-circle>
+      </a>
 
       <section class="profile-card__avatar-name">
         <strong class="h6"
@@ -25,6 +27,9 @@
 
     <section class="profile-card__actions">
       <button class="btn">Подписаться</button>
+      <button class="btn settings-btn" (click)="onSendMessage(profile.id)">
+        Написать
+      </button>
     </section>
   </section>
 }
