@@ -7,7 +7,7 @@ import { SvgIconComponent, DndDirective } from '@tt/common';
   imports: [SvgIconComponent, DndDirective],
   templateUrl: './avatar-upload.component.html',
   styleUrl: './avatar-upload.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarUploadComponent {
   preview = signal<string>('/assets/images/avatar-placeholder.png');

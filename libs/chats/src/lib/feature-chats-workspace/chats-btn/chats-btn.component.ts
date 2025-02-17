@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AvatarCircleComponent } from '@tt/common';
 import { LastMessageResponse } from '@tt/data-access';
@@ -10,7 +15,7 @@ import { LastMessageResponse } from '@tt/data-access';
   providers: [DatePipe],
   templateUrl: './chats-btn.component.html',
   styleUrl: './chats-btn.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsBtnComponent {
   chat = input<LastMessageResponse>();

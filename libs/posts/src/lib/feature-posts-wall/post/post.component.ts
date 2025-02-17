@@ -33,7 +33,7 @@ import { CommentComponent, PostInputComponent } from '../../ui';
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
   private store = inject(Store);

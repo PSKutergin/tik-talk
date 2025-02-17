@@ -8,6 +8,6 @@ import { ChatsListComponent } from '../chats-list/chats-list.component';
   imports: [RouterOutlet, ChatsListComponent],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChatsComponent { }
+export class ChatsComponent {}

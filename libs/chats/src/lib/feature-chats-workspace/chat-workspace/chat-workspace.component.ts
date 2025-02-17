@@ -13,7 +13,7 @@ import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-w
   imports: [ChatWorkspaceHeaderComponent, ChatWorkspaceMessageWrapperComponent],
   templateUrl: './chat-workspace.component.html',
   styleUrl: './chat-workspace.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceComponent {
   private store = inject(Store);

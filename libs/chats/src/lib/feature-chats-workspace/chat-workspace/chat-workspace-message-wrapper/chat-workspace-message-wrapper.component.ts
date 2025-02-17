@@ -23,10 +23,11 @@ import { MessageInputComponent } from '../../../ui';
   imports: [ChatWorkspaceMessageComponent, MessageInputComponent],
   templateUrl: './chat-workspace-message-wrapper.component.html',
   styleUrl: './chat-workspace-message-wrapper.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessageWrapperComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked {
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+{
   private store = inject(Store);
   private resizeService = inject(ResizeService);
   private chatService = inject(ChatService);

@@ -19,7 +19,7 @@ import { PostComponent } from '../post/post.component';
   imports: [PostInputComponent, PostComponent],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFeedComponent implements OnInit, AfterViewInit, OnDestroy {
   private resizeService = inject(ResizeService);

@@ -31,7 +31,7 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
   ],
   templateUrl: './chats-list.component.html',
   styleUrl: './chats-list.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsListComponent implements AfterViewInit, OnDestroy, OnInit {
   private store = inject(Store);

@@ -8,7 +8,7 @@ import { Profile } from '@tt/data-access';
   imports: [AvatarCircleComponent],
   templateUrl: './profile-header.component.html',
   styleUrl: './profile-header.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileHeaderComponent {
   profile = input<Profile>();

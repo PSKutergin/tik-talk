@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, effect, inject, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -22,7 +28,7 @@ import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent {
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;

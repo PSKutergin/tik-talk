@@ -1,4 +1,10 @@
-import { Component, inject, WritableSignal, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  WritableSignal,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
@@ -20,7 +26,7 @@ import { SubscriberCardComponent } from './subscriber-card/subscriber-card.compo
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent implements OnInit {
   private profileService = inject(ProfileService);

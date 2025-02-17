@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AvatarCircleComponent } from '@tt/common';
 import { Profile } from '@tt/data-access';
@@ -9,7 +14,7 @@ import { Profile } from '@tt/data-access';
   imports: [AvatarCircleComponent, RouterLink],
   templateUrl: './profile-card.component.html',
   styleUrl: './profile-card.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileCardComponent {
   private router = inject(Router);

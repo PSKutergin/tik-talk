@@ -8,7 +8,7 @@ import { Comment } from '@tt/data-access';
   imports: [AvatarCircleComponent, TimeFormatPipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentComponent {
   comment = input<Comment>();

@@ -7,7 +7,7 @@ import { ImgUrlPipe } from '../../pipes';
   imports: [ImgUrlPipe],
   templateUrl: './avatar-circle.component.html',
   styleUrl: './avatar-circle.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarCircleComponent {
   avatarUrl = input<string | null>();

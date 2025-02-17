@@ -18,7 +18,7 @@ import { ProfileFiltersComponent } from '../profile-filters/profile-filters.comp
   imports: [ProfileCardComponent, ProfileFiltersComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements AfterViewInit, OnDestroy {
   private resizeService = inject(ResizeService);

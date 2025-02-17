@@ -16,7 +16,7 @@ import { ProfileService } from '@tt/data-access';
   imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
   r2: Renderer2 = inject(Renderer2);
