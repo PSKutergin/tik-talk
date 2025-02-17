@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, startWith } from 'rxjs';
+import { debounceTime } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { profileActions } from '../../data';
+import { profileActions, selectProfileFilters } from '../../data';
 
 @Component({
   selector: 'app-profile-filters',
@@ -22,11 +22,20 @@ export class ProfileFiltersComponent {
     stack: ['']
   });
 
+  profileFilters = this.store.selectSignal(selectProfileFilters);
+
   constructor() {
     this.searchForm.valueChanges
-      .pipe(startWith({}), debounceTime(500), takeUntilDestroyed())
+      .pipe(debounceTime(500), takeUntilDestroyed())
       .subscribe((value) =>
         this.store.dispatch(profileActions.filterEvents({ filters: value }))
       );
+  }
+
+  ngOnInit(): void {
+    const filters = this.profileFilters();
+    this.searchForm.patchValue(filters);
+
+    this.store.dispatch(profileActions.filterEvents({ filters }));
   }
 }

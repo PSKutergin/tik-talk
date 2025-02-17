@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { debounceTime, Subscription } from 'rxjs';
 import {
   chatActions,
   selectAuthorFilter,
@@ -48,7 +48,7 @@ export class ChatsListComponent implements AfterViewInit, OnDestroy, OnInit {
   constructor() {
     // Подписываемся на изменения в поле ввода и фильтруем чаты
     this.filterFormControl.valueChanges
-      .pipe(takeUntilDestroyed())
+      .pipe(debounceTime(500), takeUntilDestroyed())
       .subscribe((author) => {
         // Отправляем экшн для фильтрации чатов по автору
         this.store.dispatch(

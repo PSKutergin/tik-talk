@@ -16,6 +16,12 @@ export const profileFeature = createFeature({
   name: 'profileFeature',
   reducer: createReducer(
     initialState,
+    on(profileActions.filterEvents, (state, payload) => {
+      return {
+        ...state,
+        profileFilters: payload.filters
+      };
+    }),
     on(profileActions.profilesLoaded, (state, payload) => {
       return {
         ...state,
