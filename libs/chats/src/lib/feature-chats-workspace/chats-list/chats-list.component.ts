@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -29,7 +30,8 @@ import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
     ReactiveFormsModule
   ],
   templateUrl: './chats-list.component.html',
-  styleUrl: './chats-list.component.scss'
+  styleUrl: './chats-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatsListComponent implements AfterViewInit, OnDestroy, OnInit {
   private store = inject(Store);

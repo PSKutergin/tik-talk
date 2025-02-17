@@ -1,5 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
@@ -14,7 +15,8 @@ import { ProfileService } from '@tt/data-access';
   standalone: true,
   imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
   templateUrl: './message-input.component.html',
-  styleUrl: './message-input.component.scss'
+  styleUrl: './message-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MessageInputComponent {
   r2: Renderer2 = inject(Renderer2);
