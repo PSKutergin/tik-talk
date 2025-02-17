@@ -38,7 +38,12 @@ export class ProfileService {
   }
 
   updateProfile(data: Partial<Profile>): Observable<Profile> {
-    return this.http.patch<Profile>(environment.api + 'account/me', data);
+    return this.http.patch<Profile>(environment.api + 'account/me', data).pipe(
+      tap((data: Profile) => {
+        this.me.set(data);
+        this.globalStoreService.me.set(data);
+      })
+    );
   }
 
   uploadAvatar(file: File): Observable<Profile> {
