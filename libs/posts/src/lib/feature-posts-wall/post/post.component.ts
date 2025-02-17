@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   computed,
   inject,
@@ -6,14 +7,19 @@ import {
   OnInit,
   Signal
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {
   AvatarCircleComponent,
   SvgIconComponent,
   TimeFormatPipe
 } from '@tt/common';
+import {
+  Comment,
+  Post,
+  postActions,
+  selectCommentsByPost
+} from '@tt/data-access';
 import { CommentComponent, PostInputComponent } from '../../ui';
-import { Comment, Post, postActions, selectCommentsByPost } from '../../data';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post',
@@ -26,7 +32,8 @@ import { Store } from '@ngrx/store';
     TimeFormatPipe
   ],
   templateUrl: './post.component.html',
-  styleUrl: './post.component.scss'
+  styleUrl: './post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
   private store = inject(Store);

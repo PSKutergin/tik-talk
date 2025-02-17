@@ -1,11 +1,17 @@
-import { Component, inject, WritableSignal, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  WritableSignal,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService } from '@tt/profile';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChatService, ProfileService, Profile } from '@tt/data-access';
 import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
-import { Profile } from '@tt/interfaces/profile';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,12 +25,16 @@ import { Profile } from '@tt/interfaces/profile';
     AvatarCircleComponent
   ],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrl: './sidebar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent implements OnInit {
   private profileService = inject(ProfileService);
+  private chatService = inject(ChatService);
+
   subscribers$ = this.profileService.getSubscribersShortList();
   me: WritableSignal<Profile | null> = this.profileService.me;
+  unreadMessages = this.chatService.unreadMessages;
 
   menuItems = [
     {
@@ -43,6 +53,10 @@ export class SidebarComponent implements OnInit {
       link: 'search'
     }
   ];
+
+  constructor() {
+    this.chatService.connectWs().pipe(takeUntilDestroyed()).subscribe();
+  }
 
   ngOnInit() {
     firstValueFrom(this.profileService.getMe());

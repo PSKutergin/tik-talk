@@ -1,5 +1,6 @@
 import { FormsModule } from '@angular/forms';
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
@@ -7,19 +8,20 @@ import {
   Renderer2
 } from '@angular/core';
 import { AvatarCircleComponent, SvgIconComponent } from '@tt/common';
-import { ProfileService } from '@tt/profile';
+import { ProfileService } from '@tt/data-access';
 
 @Component({
   selector: 'app-message-input',
   standalone: true,
   imports: [AvatarCircleComponent, SvgIconComponent, FormsModule],
   templateUrl: './message-input.component.html',
-  styleUrl: './message-input.component.scss'
+  styleUrl: './message-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
   r2: Renderer2 = inject(Renderer2);
   profile = inject(ProfileService).me;
-  postText: string = '';
+  postText = '';
 
   @Output() created = new EventEmitter<string>();
 

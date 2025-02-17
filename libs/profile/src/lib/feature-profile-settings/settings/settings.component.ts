@@ -1,12 +1,18 @@
-import { Component, effect, inject, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  ViewChild
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { AuthService } from '@tt/auth';
+import { AuthService } from '@tt/data-access';
 import { SvgIconComponent } from '@tt/common';
-import { ProfileService } from '../../data';
+import { ProfileService } from '@tt/data-access';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
 
 @Component({
@@ -21,7 +27,8 @@ import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
     AsyncPipe
   ],
   templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+  styleUrl: './settings.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent {
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;

@@ -1,4 +1,4 @@
-import { environment } from '../../../../shared/src/lib/environments/environment';
+import { environment } from '@tt/data-access';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({

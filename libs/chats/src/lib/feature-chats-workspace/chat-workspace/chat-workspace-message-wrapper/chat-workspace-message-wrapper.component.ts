@@ -1,6 +1,7 @@
 import {
   AfterViewChecked,
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -11,18 +12,18 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Chat, ChatService, ResizeService } from '@tt/data-access';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../ui';
-import { Chat, chatActions, ChatService } from '../../../data';
-import { ResizeService } from '@tt/shared';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chat-workspace-message-wrapper',
   standalone: true,
   imports: [ChatWorkspaceMessageComponent, MessageInputComponent],
   templateUrl: './chat-workspace-message-wrapper.component.html',
-  styleUrl: './chat-workspace-message-wrapper.component.scss'
+  styleUrl: './chat-workspace-message-wrapper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessageWrapperComponent
   implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
@@ -69,11 +70,6 @@ export class ChatWorkspaceMessageWrapperComponent
 
   onMessageCreated(messageText: string) {
     this.chatService.wsAdapter.sendMessage(this.chat().id, messageText);
-
-    this.store.dispatch(
-      chatActions.fetchActiveChat({ chatId: this.chat().id })
-    );
-
     this.scrollMessages();
   }
 }

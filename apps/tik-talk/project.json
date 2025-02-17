@@ -43,8 +43,8 @@
           ],
           "fileReplacements": [
             {
-              "replace": "libs/shared/src/environments/environment.ts",
-              "with": "libs/shared/src/environments/environment.prod.ts"
+              "replace": "libs/data-access/src/lib/environments/environment.ts",
+              "with": "libs/data-access/src/lib/environments/environment.prod.ts"
             }
           ],
           "outputHashing": "all"

@@ -31,4 +31,10 @@
     flex-wrap: wrap;
     height: min-content;
   }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
 }

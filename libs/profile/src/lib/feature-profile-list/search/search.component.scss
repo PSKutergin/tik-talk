@@ -1,6 +1,7 @@
 :host {
   display: grid;
   gap: 1.25rem;
+  grid-template-rows: min-content 1fr;
 }
 
 .profile-card__wrapper {
