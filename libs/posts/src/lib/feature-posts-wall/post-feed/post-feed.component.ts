@@ -8,10 +8,9 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { postActions, selectPosts, ResizeService } from '@tt/data-access';
 import { PostInputComponent } from '../../ui';
-import { postActions, selectPosts } from '../../data';
 import { PostComponent } from '../post/post.component';
-import { ResizeService } from '@tt/shared';
 
 @Component({
   selector: 'app-post-feed',

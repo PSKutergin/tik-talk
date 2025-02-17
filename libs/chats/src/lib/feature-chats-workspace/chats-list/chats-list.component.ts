@@ -9,15 +9,15 @@ import {
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   chatActions,
   selectAuthorFilter,
-  selectFilteredChats
-} from '../../data';
+  selectFilteredChats,
+  ResizeService
+} from '@tt/data-access';
 import { ChatsBtnComponent } from '../chats-btn/chats-btn.component';
-import { ResizeService } from '@tt/shared';
-import { Store } from '@ngrx/store';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chats-list',

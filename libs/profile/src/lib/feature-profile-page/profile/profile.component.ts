@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { PostFeedComponent } from '@tt/posts';
 import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
-import { ProfileService } from '../../data';
+import { ProfileService } from '@tt/data-access';
 import { ProfileHeaderComponent } from '../../ui';
 
 @Component({

@@ -11,11 +11,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Chat, ChatService, ResizeService } from '@tt/data-access';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../ui';
-import { Chat, ChatService } from '../../../data';
-import { ResizeService } from '@tt/shared';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chat-workspace-message-wrapper',

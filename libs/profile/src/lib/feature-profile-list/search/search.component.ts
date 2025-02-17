@@ -7,10 +7,9 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { selectFilteredProfiles } from '../../data';
+import { selectFilteredProfiles, ResizeService } from '@tt/data-access';
 import { ProfileCardComponent } from '../../ui';
 import { ProfileFiltersComponent } from '../profile-filters/profile-filters.component';
-import { ResizeService } from '@tt/shared';
 
 @Component({
   selector: 'app-search',

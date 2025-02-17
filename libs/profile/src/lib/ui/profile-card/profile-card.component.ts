@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AvatarCircleComponent } from '@tt/common';
-import { Profile } from '@tt/interfaces/profile';
+import { Profile } from '@tt/data-access';
 
 @Component({
   selector: 'profile-card',

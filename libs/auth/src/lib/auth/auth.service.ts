@@ -1,10 +1,10 @@
-import { environment } from '@tt/shared';
-import { TokenResponse } from './auth.interface';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { environment } from '@tt/data-access';
+import { TokenResponse } from './auth.interface';
 
 @Injectable({
   providedIn: 'root'

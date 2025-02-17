@@ -6,14 +6,19 @@ import {
   OnInit,
   Signal
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import {
   AvatarCircleComponent,
   SvgIconComponent,
   TimeFormatPipe
 } from '@tt/common';
+import {
+  Comment,
+  Post,
+  postActions,
+  selectCommentsByPost
+} from '@tt/data-access';
 import { CommentComponent, PostInputComponent } from '../../ui';
-import { Comment, Post, postActions, selectCommentsByPost } from '../../data';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-post',

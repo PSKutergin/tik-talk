@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filter, of, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { chatActions, selectActiveChat } from '../../data';
+import { chatActions, selectActiveChat } from '@tt/data-access';
 import { ChatWorkspaceHeaderComponent } from './chat-workspace-header/chat-workspace-header.component';
 import { ChatWorkspaceMessageWrapperComponent } from './chat-workspace-message-wrapper/chat-workspace-message-wrapper.component';
 

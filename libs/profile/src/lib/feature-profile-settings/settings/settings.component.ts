@@ -6,7 +6,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@tt/auth';
 import { SvgIconComponent } from '@tt/common';
-import { ProfileService } from '../../data';
+import { ProfileService } from '@tt/data-access';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
 
 @Component({

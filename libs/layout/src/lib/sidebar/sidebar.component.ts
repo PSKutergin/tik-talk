@@ -3,11 +3,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ChatService } from '@tt/chats';
-import { ProfileService } from '@tt/profile';
+import { ChatService, ProfileService, Profile } from '@tt/data-access';
 import { SvgIconComponent, AvatarCircleComponent } from '@tt/common';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
-import { Profile } from '@tt/interfaces/profile';
 
 @Component({
   selector: 'app-sidebar',

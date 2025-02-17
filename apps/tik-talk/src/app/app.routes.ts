@@ -5,13 +5,18 @@ import { canActivateAuth, LoginComponent } from '@tt/auth';
 import {
   ProfileComponent,
   SettingsComponent,
-  SearchComponent,
-  profileFeature,
-  ProfileEffects
+  SearchComponent
 } from '@tt/profile';
-import { chatsRoutes, ChatEffects, chatsFeature } from '@tt/chats';
+import {
+  ChatEffects,
+  chatsFeature,
+  profileFeature,
+  ProfileEffects,
+  postsFeature,
+  PostEffects
+} from '@tt/data-access';
 import { LayoutComponent } from '@tt/layout';
-import { postsFeature, PostEffects } from '@tt/posts';
+import { chatsRoutes } from '@tt/chats';
 
 export const routes: Routes = [
   {

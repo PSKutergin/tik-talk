@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { profileActions, selectProfileFilters } from '../../data';
+import { profileActions, selectProfileFilters } from '@tt/data-access';
 
 @Component({
   selector: 'app-profile-filters',
@@ -12,7 +12,7 @@ import { profileActions, selectProfileFilters } from '../../data';
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss'
 })
-export class ProfileFiltersComponent {
+export class ProfileFiltersComponent implements OnInit {
   private fb = inject(FormBuilder);
   private store = inject(Store);
 
