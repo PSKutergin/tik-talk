@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
-import { AuthService } from '@tt/auth';
+import { AuthService } from '@tt/data-access';
 import { SvgIconComponent } from '@tt/common';
 import { ProfileService } from '@tt/data-access';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';

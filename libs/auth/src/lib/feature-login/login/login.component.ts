@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, TokenResponse } from '../../auth';
+import { AuthService, TokenResponse } from '@tt/data-access';
 
 @Component({
   selector: 'app-login',

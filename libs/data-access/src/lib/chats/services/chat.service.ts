@@ -4,7 +4,7 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { DateTime } from 'luxon';
-import { AuthService } from '@tt/auth';
+import { AuthService } from '../../auth';
 import { environment } from '../../environments';
 import { ProfileService, Profile } from '../../profile';
 import {

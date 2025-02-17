@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { canActivateAuth, LoginComponent } from '@tt/auth';
+import { LoginComponent } from '@tt/auth';
 import {
   ProfileComponent,
   SettingsComponent,
   SearchComponent
 } from '@tt/profile';
 import {
+  canActivateAuth,
   ChatEffects,
   chatsFeature,
   profileFeature,

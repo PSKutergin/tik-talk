@@ -10,7 +10,7 @@ import {
   ChatWsService
 } from '../interfaces/chat-ws-service.interface';
 import { inject } from '@angular/core';
-import { AuthService } from '@tt/auth';
+import { AuthService } from '@tt/data-access';
 
 export class ChatWsRxjsService implements ChatWsService {
   private authService = inject(AuthService);
