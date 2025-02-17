@@ -31,7 +31,7 @@ export class ChatService {
   messagesUrl = `${environment.api}message/`;
   me: WritableSignal<Profile | null> = inject(ProfileService).me;
   unreadMessages = signal<number>(0);
-  activeChatId = signal<number>(0);
+  activeChat = signal<Chat | null>(null);
   activeChatMessages = signal<{ date: string; messages: Message[] }[]>([]);
 
   wsAdapter: ChatWsService = new ChatWsRxjsService();
@@ -48,17 +48,27 @@ export class ChatService {
     if (!('action' in message)) return;
 
     if (isNewMessage(message)) {
-      if (this.activeChatId() === message.data.chat_id) {
+      if (this.activeChat()?.id === message.data.chat_id) {
         this.activeChatMessages.update((mgs) => {
           const newMessage = {
             id: message.data.id,
             userFromId: message.data.author,
             personalChatId: message.data.chat_id,
             text: message.data.message,
-            createdAt: message.data.created_at,
+            createdAt: DateTime.fromFormat(
+              message.data.created_at,
+              'yyyy-MM-dd HH:mm:ss'
+            ).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
             isRead: false,
-            isMine: false
+            isMine: message.data.author === this.me()!.id,
+            user:
+              message.data.author === this.me()!.id
+                ? this.me()
+                : this.activeChat()!.companion
           };
+
+          console.log(newMessage);
+
           const oldMessages = mgs.flatMap((d) => d.messages);
           const newMessages = [...oldMessages, newMessage];
 
@@ -79,8 +89,6 @@ export class ChatService {
   }
 
   getChatById(id: number): Observable<Chat> {
-    this.activeChatId.set(id);
-
     return this.http.get<Chat>(`${this.chatsUrl}${id}`).pipe(
       map((chat: Chat) => {
         const patchedMessages = chat.messages.map((message) => ({
@@ -91,6 +99,8 @@ export class ChatService {
               : chat.userSecond,
           isMine: message.userFromId === this.me()!.id
         }));
+
+        this.activeChat.set(chat);
 
         this.activeChatMessages.set(this.groupMessagesByDate(patchedMessages));
 
@@ -130,7 +140,7 @@ export class ChatService {
     // Преобразуем createdAt для каждого сообщения
     const formattedMessages = messages.map((message) => ({
       ...message,
-      createdAt: DateTime.fromISO(message.createdAt, { zone: 'utc' })
+      createdAtTime: DateTime.fromISO(message.createdAt, { zone: 'utc' })
         .setZone(DateTime.local().zone)
         .toFormat('HH:mm')
     }));

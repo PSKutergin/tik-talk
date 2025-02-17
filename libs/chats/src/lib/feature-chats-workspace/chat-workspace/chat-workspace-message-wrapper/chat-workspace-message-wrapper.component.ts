@@ -13,7 +13,7 @@ import {
 import { Subscription } from 'rxjs';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { MessageInputComponent } from '../../../ui';
-import { Chat, chatActions, ChatService } from '../../../data';
+import { Chat, ChatService } from '../../../data';
 import { ResizeService } from '@tt/shared';
 import { Store } from '@ngrx/store';
 
@@ -69,11 +69,6 @@ export class ChatWorkspaceMessageWrapperComponent
 
   onMessageCreated(messageText: string) {
     this.chatService.wsAdapter.sendMessage(this.chat().id, messageText);
-
-    this.store.dispatch(
-      chatActions.fetchActiveChat({ chatId: this.chat().id })
-    );
-
     this.scrollMessages();
   }
 }
