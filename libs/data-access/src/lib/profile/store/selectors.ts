@@ -10,3 +10,13 @@ export const selectProfileFilters = createSelector(
   profileFeature.selectProfileFilters,
   (filters) => filters
 );
+
+export const selectProfilePageble = createSelector(
+  profileFeature.selectProfileFeatureState,
+  (state) => {
+    return {
+      page: state.page,
+      size: state.size
+    };
+  }
+);
