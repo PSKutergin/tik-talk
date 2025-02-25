@@ -11,7 +11,7 @@ import { firstValueFrom } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@tt/data-access';
-import { SvgIconComponent } from '@tt/common';
+import { SvgIconComponent, StackInputComponent } from '@tt/common';
 import { ProfileService } from '@tt/data-access';
 import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
 
@@ -24,7 +24,8 @@ import { AvatarUploadComponent, ProfileHeaderComponent } from '../../ui';
     ProfileHeaderComponent,
     ReactiveFormsModule,
     RouterLink,
-    AsyncPipe
+    AsyncPipe,
+    StackInputComponent
   ],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
@@ -44,14 +45,15 @@ export class SettingsComponent {
     lastName: ['', [Validators.required]],
     username: [{ value: '', disabled: true }, [Validators.required]],
     description: [''],
-    stack: ['']
+    stack: [[]]
   });
 
   constructor() {
     effect(() => {
-      this.profileForm.patchValue({
-        ...this.profileService.me(),
-        stack: this.mergeStack(this.profileService.me()?.stack)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-expect-error
+      return this.profileForm.patchValue({
+        ...this.profileService.me()
       });
     });
   }
@@ -72,24 +74,9 @@ export class SettingsComponent {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-expect-error
       this.profileService.updateProfile({
-        ...this.profileForm.value,
-        stack: this.splitStack(this.profileForm.value.stack)
+        ...this.profileForm.value
       })
     );
-  }
-
-  splitStack(stack: string | string[] | null | undefined): string[] {
-    if (!stack) return [];
-    if (Array.isArray(stack)) return stack;
-
-    return stack.split(', ');
-  }
-
-  mergeStack(stack: string | string[] | null | undefined): string {
-    if (!stack) return '';
-    if (Array.isArray(stack)) return stack.join(', ');
-
-    return stack;
   }
 
   onLogout(): void {
