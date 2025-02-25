@@ -112,6 +112,34 @@ input[type='number'] {
   transition: all 0.3s ease;
 }
 
+.btn-plus {
+  width: 1rem;
+  height: 1rem;
+  background: var(--white);
+  border-radius: 50%;
+  position: relative;
+  border: none;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    width: 0.1rem;
+    height: 0.5rem;
+    background: var(--black);
+    top: 50%;
+    left: 50%;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+}
+
 .btn-transparent {
   border-color: var(--white);
   background: transparent;

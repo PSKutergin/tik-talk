@@ -1,8 +1,12 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   HostBinding,
-  HostListener
+  inject,
+  signal,
+  ViewChild
 } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import {
@@ -29,6 +33,12 @@ import { AsyncPipe } from '@angular/common';
   ]
 })
 export class StackInputComponent implements ControlValueAccessor {
+  @ViewChild('input')
+  inputElement!: ElementRef;
+
+  cdr = inject(ChangeDetectorRef);
+
+  isShowInput = signal<boolean>(false);
   value$ = new BehaviorSubject<string[]>([]);
   #disabled = false;
   innerInput = '';
@@ -36,19 +46,6 @@ export class StackInputComponent implements ControlValueAccessor {
   @HostBinding('class.disabled')
   get disabled() {
     return this.#disabled;
-  }
-
-  @HostListener('keydown.enter', ['$event'])
-  onEnter(event: KeyboardEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (!this.innerInput.trim()) return;
-
-    this.value$.next([...this.value$.value, this.innerInput]);
-    this.innerInput = '';
-
-    this.onChange(this.value$.value);
   }
 
   writeValue(stack: string[] | null): void {
@@ -68,6 +65,22 @@ export class StackInputComponent implements ControlValueAccessor {
   onChange(value: string[] | null) {}
 
   onTouched() {}
+
+  onTagAdd() {
+    this.isShowInput.set(true);
+    this.cdr.detectChanges();
+    this.inputElement.nativeElement.focus();
+  }
+
+  onSave() {
+    this.isShowInput.set(false);
+    if (!this.innerInput.trim()) return;
+
+    this.value$.next([...this.value$.value, this.innerInput]);
+    this.innerInput = '';
+
+    this.onChange(this.value$.value);
+  }
 
   onTagDelete(index: number) {
     const tags = this.value$.value;

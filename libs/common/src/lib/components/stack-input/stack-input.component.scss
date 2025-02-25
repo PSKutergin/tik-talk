@@ -18,17 +18,27 @@
     }
   }
 
-  .stack-ghost-input {
-    flex: auto;
+  .stack-ghost-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-family: 'JetBrains Mono', sans-serif;
-    color: var(--white);
-    background: none;
-    border: none;
-    outline: none;
+    .stack-btn__check {
+      background: none;
+      border: none;
+      border-radius: 50%;
+    }
+
+    .stack-ghost-input {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-family: 'JetBrains Mono', sans-serif;
+      color: var(--white);
+      background: none;
+      border: none;
+      outline: none;
+    }
   }
 }
 

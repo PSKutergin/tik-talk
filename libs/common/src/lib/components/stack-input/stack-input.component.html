@@ -11,5 +11,19 @@
     </div>
   }
 
-  <input type="text" class="stack-ghost-input" [(ngModel)]="innerInput" />
+  <div class="stack-ghost-wrapper">
+    @if (isShowInput()) {
+      <input
+        type="text"
+        class="stack-ghost-input"
+        [(ngModel)]="innerInput"
+        #input
+        (blur)="onSave()" />
+      <button type="button" class="stack-btn__check svg16" (click)="onSave()">
+        <svg icon="check" class="svg16"></svg>
+      </button>
+    } @else {
+      <button type="button" class="btn-plus" (click)="onTagAdd()"></button>
+    }
+  </div>
 </div>
