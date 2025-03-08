@@ -222,6 +222,12 @@ input[type='number'] {
     border: none;
     outline: none;
     background: transparent;
+    color: var(--white-075);
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--primary);
+    }
   }
 }
 

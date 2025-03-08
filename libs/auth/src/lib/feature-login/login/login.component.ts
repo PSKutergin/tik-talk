@@ -7,11 +7,12 @@ import {
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, TokenResponse } from '@tt/data-access';
+import { TtInputComponent } from '@tt/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TtInputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -20,8 +21,6 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
-
-  isShowPassword = signal<boolean>(false);
 
   loginForm = this.fb.group({
     username: ['', [Validators.required]],

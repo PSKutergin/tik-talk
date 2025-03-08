@@ -5,36 +5,20 @@
   (ngSubmit)="onSubmit()">
   <h1 class="h1 mb60">Вход</h1>
 
-  <label class="control-label mb16">
+  <tt-input
+    type="text"
+    placeholder="Введите логин"
+    icon="telegram"
+    formControlName="username">
     Telegram username
-    <input
-      class="input"
-      type="text"
-      placeholder="Введите логин"
-      formControlName="username" />
-    <span class="input-icon">
-      <img src="assets/svg/telegram.svg" alt="telegram" />
-    </span>
-  </label>
+  </tt-input>
 
-  <label class="control-label mb32">
+  <tt-input
+    type="password"
+    placeholder="Введите пароль"
+    formControlName="password">
     Пароль
-    <input
-      class="input"
-      [type]="isShowPassword() ? 'text' : 'password'"
-      placeholder="Введите пароль"
-      formControlName="password" />
-    <button
-      type="button"
-      class="input-icon"
-      (click)="isShowPassword.set(!isShowPassword())">
-      <img
-        [src]="
-          isShowPassword() ? 'assets/svg/eye.svg' : 'assets/svg/eye-close.svg'
-        "
-        alt="eye" />
-    </button>
-  </label>
+  </tt-input>
 
   <button class="btn btn-shadow" type="submit">Войти</button>
 </form>
