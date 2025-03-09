@@ -12,7 +12,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom, Subscription } from 'rxjs';
 import { AuthService, ProfileService, ResizeService } from '@tt/data-access';
 import { AvatarUploadComponent } from '../../../ui';
-import { StackInputComponent, SvgIconComponent } from '@tt/common';
+import {
+  AddressInputComponent,
+  StackInputComponent,
+  SvgIconComponent
+} from '@tt/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -23,7 +27,8 @@ import { RouterLink } from '@angular/router';
     ReactiveFormsModule,
     SvgIconComponent,
     AvatarUploadComponent,
-    StackInputComponent
+    StackInputComponent,
+    AddressInputComponent
   ],
   templateUrl: './settings-form.component.html',
   styleUrl: './settings-form.component.scss',
@@ -44,7 +49,8 @@ export class SettingsFormComponent implements AfterViewInit, OnDestroy {
     lastName: ['', [Validators.required]],
     username: [{ value: '', disabled: true }, [Validators.required]],
     description: [''],
-    stack: [[]]
+    stack: [[]],
+    city: [null]
   });
 
   constructor() {

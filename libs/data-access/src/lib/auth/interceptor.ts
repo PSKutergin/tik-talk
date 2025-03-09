@@ -23,6 +23,8 @@ export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ): Observable<any> => {
+  if (req.url.includes('dadata.ru')) return next(req);
+
   const authService: AuthService = inject(AuthService);
   const token: string | null = authService.token;
 

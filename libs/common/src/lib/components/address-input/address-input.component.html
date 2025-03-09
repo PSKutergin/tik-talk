@@ -1,0 +1,33 @@
+<div class="dropdown-wrapper">
+  <tt-input [formControl]="innerSearchControl" placeholder="Введите адрес">
+    <ng-content></ng-content>
+  </tt-input>
+
+  @if (suggestions$ | async; as suggestions) {
+    <div class="dropdown" [class.show]="isDropdownOpen()">
+      @for (suggestion of suggestions; track suggestion) {
+        <button
+          type="button"
+          (click)="selectSuggestion(suggestion)"
+          class="dropdown-item">
+          {{ suggestion.data | addressFormat }}
+        </button>
+      }
+    </div>
+  }
+</div>
+
+<div [formGroup]="addressForm" class="address-form">
+  <tt-input formControlName="city" placeholder="Введите город">
+    <span class="form-label__text">Город</span>
+  </tt-input>
+  <tt-input formControlName="street" placeholder="Введите улицу">
+    <span class="form-label__text">Улица</span>
+  </tt-input>
+  <tt-input formControlName="house" placeholder="Введите номер дома">
+    <span class="form-label__text">Дом</span>
+  </tt-input>
+  <tt-input formControlName="flat" placeholder="Введите номер квартиры">
+    <span class="form-label__text">Квартира</span>
+  </tt-input>
+</div>
