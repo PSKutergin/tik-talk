@@ -1,0 +1,52 @@
+.stack-control {
+  width: 100%;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  border-bottom: 0.1rem solid var(--white);
+  background: var(--black);
+  padding: 0.75rem 0;
+
+  .stack-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .stack-btn__delete {
+      background: none;
+      border: none;
+    }
+  }
+
+  .stack-ghost-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    .stack-btn__check {
+      background: none;
+      border: none;
+      border-radius: 50%;
+    }
+
+    .stack-ghost-input {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-family: 'JetBrains Mono', sans-serif;
+      color: var(--white);
+      background: none;
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+:host {
+  &.disabled {
+    .stack-control {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}

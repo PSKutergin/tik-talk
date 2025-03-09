@@ -1,0 +1,25 @@
+<label class="control-label mb16">
+  <ng-content></ng-content>
+  <input
+    class="input"
+    [type]="
+      type() === 'password' ? (isShowPassword() ? 'text' : 'password') : type()
+    "
+    [placeholder]="placeholder()"
+    [(ngModel)]="value"
+    (input)="onInputChange($event)"
+    (blur)="onTouched()" />
+
+  @if (icon(); as icon) {
+    <span class="input-icon">
+      <svg [icon]="icon" class="svg24"></svg>
+    </span>
+  } @else if (type() === 'password') {
+    <button
+      type="button"
+      class="input-icon"
+      (click)="isShowPassword.set(!isShowPassword())">
+      <svg [icon]="isShowPassword() ? 'eye' : 'eye-close'" class="svg24"></svg>
+    </button>
+  }
+</label>

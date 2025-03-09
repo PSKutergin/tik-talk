@@ -1,0 +1,31 @@
+<ng-content></ng-content>
+
+<div class="stack-control">
+  @for (tech of value$ | async; track tech; let i = $index) {
+    <div class="skill-tag stack-tag">
+      <button
+        type="button"
+        class="stack-btn__delete svg16"
+        (click)="onTagDelete(i)">
+        <svg icon="cross" class="svg10"></svg>
+      </button>
+      {{ tech }}
+    </div>
+  }
+
+  <div class="stack-ghost-wrapper">
+    @if (isShowInput()) {
+      <input
+        type="text"
+        class="stack-ghost-input"
+        [(ngModel)]="innerInput"
+        #input
+        (blur)="onSave()" />
+      <button type="button" class="stack-btn__check svg16" (click)="onSave()">
+        <svg icon="check" class="svg16"></svg>
+      </button>
+    } @else {
+      <button type="button" class="btn-plus" (click)="onTagAdd()"></button>
+    }
+  </div>
+</div>

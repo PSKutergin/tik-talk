@@ -41,7 +41,5 @@ export class ProfileFiltersComponent implements OnInit {
   ngOnInit(): void {
     const filters = this.profileFilters();
     this.searchForm.patchValue(filters);
-
-    this.store.dispatch(profileActions.filterEvents({ filters }));
   }
 }

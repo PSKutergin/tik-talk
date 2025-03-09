@@ -1,7 +1,12 @@
 <app-profile-filters></app-profile-filters>
 
-<section class="profile-card__wrapper">
-  @for (profile of profiles(); track profile.id) {
-    <profile-card [profile]="profile"></profile-card>
+<section
+  class="profile-card__wrapper"
+  waIntersectionObserver
+  waIntersectionThreshold="0.5">
+  @for (profile of profiles(); track profile.id; let last = $last) {
+    <profile-card
+      [profile]="profile"
+      (waIntersectionObservee)="last && onIntersection($event)"></profile-card>
   }
 </section>

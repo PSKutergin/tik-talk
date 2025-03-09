@@ -47,7 +47,12 @@ export class ChatService {
     if (!('action' in message)) return;
 
     if (isNewMessage(message)) {
-      if (this.activeChat()?.id === message.data.chat_id) {
+      const activeChat = this.activeChat();
+      const me = this.me();
+
+      if (!me || !activeChat) return;
+
+      if (activeChat.id === message.data.chat_id) {
         this.activeChatMessages.update((mgs) => {
           const newMessage = {
             id: message.data.id,
@@ -59,14 +64,12 @@ export class ChatService {
               'yyyy-MM-dd HH:mm:ss'
             ).toFormat("yyyy-LL-dd'T'HH:mm:ss"),
             isRead: false,
-            isMine: message.data.author === this.me()!.id,
+            isMine: message.data.author === me.id,
             user:
-              message.data.author === this.me()!.id
-                ? this.me()
-                : this.activeChat()!.companion
+              message.data.author === activeChat.userFirst.id
+                ? activeChat.userFirst
+                : activeChat.userSecond
           };
-
-          console.log(newMessage);
 
           const oldMessages = mgs.flatMap((d) => d.messages);
           const newMessages = [...oldMessages, newMessage];
